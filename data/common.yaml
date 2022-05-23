@@ -1,4 +1,5 @@
 ---
+nexus::version: null
 nexus::download_folder: /opt/sonatype
 nexus::download_proxy: null
 nexus::download_site: https://download.sonatype.com/nexus/3
@@ -14,3 +15,6 @@ nexus::purge_installations: true
 nexus::purge_default_repositories: false
 nexus::user: nexus
 nexus::work_dir: "%{lookup('nexus::install_root')}/sonatype-work/nexus3"
+nexus::package_type: 'src'
+nexus::package_name: 'nexus'
+nexus::package_ensure: 'installed'
