@@ -72,9 +72,7 @@ class role_nexus_server {
   class{ 'java': }
   
   class{ 'nexus':
-    version               => '3.37.3',
-    revision              => '02',
-    nexus_type            => 'unix',
+    version => '3.42.0-01',
   }
   
   Class['java'] ->

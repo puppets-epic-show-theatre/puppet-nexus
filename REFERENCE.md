@@ -9,13 +9,13 @@
 #### Public Classes
 
 * [`nexus`](#nexus): Install and configure Sonatype Nexus Repository Manager 3.
-* [`nexus::config::admin`](#nexusconfigadmin): Manage the nexus repository manager administrator account
-* [`nexus::config::anonymous`](#nexusconfiganonymous): Manage if anonymous user have access to nexus repository manager
-* [`nexus::config::default_repositories`](#nexusconfigdefault_repositories): Removes the default repositories for maven and nuget
-* [`nexus::config::device`](#nexusconfigdevice): Create puppet device config used to connect to the rest api
-* [`nexus::config::email`](#nexusconfigemail): Manage the nexus repository manager email settings
-* [`nexus::config::properties`](#nexusconfigproperties): A short summary of the purpose of this class
-* [`nexus::plugin::composer`](#nexusplugincomposer): Install the composer repository format plugin
+* [`nexus::config::admin`](#nexus--config--admin): Manage the nexus repository manager administrator account
+* [`nexus::config::anonymous`](#nexus--config--anonymous): Manage if anonymous user have access to nexus repository manager
+* [`nexus::config::default_repositories`](#nexus--config--default_repositories): Removes the default repositories for maven and nuget
+* [`nexus::config::device`](#nexus--config--device): Create puppet device config used to connect to the rest api
+* [`nexus::config::email`](#nexus--config--email): Manage the nexus repository manager email settings
+* [`nexus::config::properties`](#nexus--config--properties): A short summary of the purpose of this class
+* [`nexus::plugin::composer`](#nexus--plugin--composer): Install the composer repository format plugin
 
 #### Private Classes
 
@@ -27,16 +27,16 @@
 
 ### Defined types
 
-* [`nexus::resource::blobstore::file`](#nexusresourceblobstorefile): Resource to manage (local) file blobstore
-* [`nexus::resource::repository::apt::proxy`](#nexusresourcerepositoryaptproxy): Resource to manage apt proxy repository
-* [`nexus::resource::repository::docker::group`](#nexusresourcerepositorydockergroup): Resource to manage docker group repository
-* [`nexus::resource::repository::docker::hosted`](#nexusresourcerepositorydockerhosted): Resource to manage docker hosted repository
-* [`nexus::resource::repository::docker::proxy`](#nexusresourcerepositorydockerproxy): Resource to manage docker proxy repository
-* [`nexus::resource::repository::npm::group`](#nexusresourcerepositorynpmgroup): Resource to manage npm group repository
-* [`nexus::resource::repository::npm::hosted`](#nexusresourcerepositorynpmhosted): Resource to manage npm hosted repository
-* [`nexus::resource::repository::npm::proxy`](#nexusresourcerepositorynpmproxy): Resource to manage npm proxy repository
-* [`nexus::resource::repository::yum::hosted`](#nexusresourcerepositoryyumhosted): Resource to manage yum hosted repository
-* [`nexus::resource::repository::yum::proxy`](#nexusresourcerepositoryyumproxy): Resource to manage yum proxy repository
+* [`nexus::resource::blobstore::file`](#nexus--resource--blobstore--file): Resource to manage (local) file blobstore
+* [`nexus::resource::repository::apt::proxy`](#nexus--resource--repository--apt--proxy): Resource to manage apt proxy repository
+* [`nexus::resource::repository::docker::group`](#nexus--resource--repository--docker--group): Resource to manage docker group repository
+* [`nexus::resource::repository::docker::hosted`](#nexus--resource--repository--docker--hosted): Resource to manage docker hosted repository
+* [`nexus::resource::repository::docker::proxy`](#nexus--resource--repository--docker--proxy): Resource to manage docker proxy repository
+* [`nexus::resource::repository::npm::group`](#nexus--resource--repository--npm--group): Resource to manage npm group repository
+* [`nexus::resource::repository::npm::hosted`](#nexus--resource--repository--npm--hosted): Resource to manage npm hosted repository
+* [`nexus::resource::repository::npm::proxy`](#nexus--resource--repository--npm--proxy): Resource to manage npm proxy repository
+* [`nexus::resource::repository::yum::hosted`](#nexus--resource--repository--yum--hosted): Resource to manage yum hosted repository
+* [`nexus::resource::repository::yum::proxy`](#nexus--resource--repository--yum--proxy): Resource to manage yum proxy repository
 
 ### Resource types
 
@@ -68,120 +68,120 @@ class{ 'nexus':
 
 The following parameters are available in the `nexus` class:
 
-* [`version`](#version)
-* [`download_folder`](#download_folder)
-* [`download_site`](#download_site)
-* [`download_proxy`](#download_proxy)
-* [`install_root`](#install_root)
-* [`work_dir`](#work_dir)
-* [`user`](#user)
-* [`group`](#group)
-* [`host`](#host)
-* [`port`](#port)
-* [`manage_api_resources`](#manage_api_resources)
-* [`manage_config`](#manage_config)
-* [`manage_user`](#manage_user)
-* [`manage_work_dir`](#manage_work_dir)
-* [`purge_installations`](#purge_installations)
-* [`purge_default_repositories`](#purge_default_repositories)
+* [`version`](#-nexus--version)
+* [`download_folder`](#-nexus--download_folder)
+* [`download_site`](#-nexus--download_site)
+* [`download_proxy`](#-nexus--download_proxy)
+* [`install_root`](#-nexus--install_root)
+* [`work_dir`](#-nexus--work_dir)
+* [`user`](#-nexus--user)
+* [`group`](#-nexus--group)
+* [`host`](#-nexus--host)
+* [`port`](#-nexus--port)
+* [`manage_api_resources`](#-nexus--manage_api_resources)
+* [`manage_config`](#-nexus--manage_config)
+* [`manage_user`](#-nexus--manage_user)
+* [`manage_work_dir`](#-nexus--manage_work_dir)
+* [`purge_installations`](#-nexus--purge_installations)
+* [`purge_default_repositories`](#-nexus--purge_default_repositories)
 
-##### <a name="version"></a>`version`
+##### <a name="-nexus--version"></a>`version`
 
 Data type: `Pattern[/3.\d+.\d+-\d+/]`
 
 The version to download, install and manage.
 
-##### <a name="download_folder"></a>`download_folder`
+##### <a name="-nexus--download_folder"></a>`download_folder`
 
 Data type: `Stdlib::Absolutepath`
 
 Destination folder of the downloaded archive.
 
-##### <a name="download_site"></a>`download_site`
+##### <a name="-nexus--download_site"></a>`download_site`
 
 Data type: `Stdlib::HTTPUrl`
 
 Download uri which will be appended with filename of the archive to download.
 
-##### <a name="download_proxy"></a>`download_proxy`
+##### <a name="-nexus--download_proxy"></a>`download_proxy`
 
 Data type: `Optional[Stdlib::HTTPUrl]`
 
 Proxyserver address which will be used to download the archive file.
 
-##### <a name="install_root"></a>`install_root`
+##### <a name="-nexus--install_root"></a>`install_root`
 
 Data type: `Stdlib::Absolutepath`
 
 The root filesystem path where the downloaded archive will be extracted to.
 
-##### <a name="work_dir"></a>`work_dir`
+##### <a name="-nexus--work_dir"></a>`work_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The nexus repository manager working directory which contains the embedded database and local blobstores.
 
-##### <a name="user"></a>`user`
+##### <a name="-nexus--user"></a>`user`
 
 Data type: `String[1]`
 
 The operation system user used to start the nexus repository manager service.
 
-##### <a name="group"></a>`group`
+##### <a name="-nexus--group"></a>`group`
 
 Data type: `String[1]`
 
 The operation system group used to start the nexus repository manager service.
 
-##### <a name="host"></a>`host`
+##### <a name="-nexus--host"></a>`host`
 
 Data type: `Stdlib::Host`
 
 The bind address where the nexus repository manager service should bind to.
 
-##### <a name="port"></a>`port`
+##### <a name="-nexus--port"></a>`port`
 
 Data type: `Stdlib::Port`
 
 The port which the nexus repository manager service should use.
 
-##### <a name="manage_api_resources"></a>`manage_api_resources`
+##### <a name="-nexus--manage_api_resources"></a>`manage_api_resources`
 
 Data type: `Boolean`
 
 Set if this module should manage resources which require to be set over the nexus repository manager rest api.
 
-##### <a name="manage_config"></a>`manage_config`
+##### <a name="-nexus--manage_config"></a>`manage_config`
 
 Data type: `Boolean`
 
 Set if this module should manage the config file of nexus repository manager.
 
-##### <a name="manage_user"></a>`manage_user`
+##### <a name="-nexus--manage_user"></a>`manage_user`
 
 Data type: `Boolean`
 
 Set if this module should manage the creation of the operation system user.
 
-##### <a name="manage_work_dir"></a>`manage_work_dir`
+##### <a name="-nexus--manage_work_dir"></a>`manage_work_dir`
 
 Data type: `Boolean`
 
 Set if this module should manage the work directory of the nexus repository manager.
 
-##### <a name="purge_installations"></a>`purge_installations`
+##### <a name="-nexus--purge_installations"></a>`purge_installations`
 
 Data type: `Boolean`
 
 Set this option if you want old installations of nexus repository manager to get automatically deleted.
 
-##### <a name="purge_default_repositories"></a>`purge_default_repositories`
+##### <a name="-nexus--purge_default_repositories"></a>`purge_default_repositories`
 
 Data type: `Boolean`
 
 Set this option if you want to remove the default created maven and nuget repositories.
 
-### <a name="nexusconfigadmin"></a>`nexus::config::admin`
+### <a name="nexus--config--admin"></a>`nexus::config::admin`
 
 Manage the nexus repository manager administrator account
 
@@ -197,14 +197,14 @@ include nexus::config::admin
 
 The following parameters are available in the `nexus::config::admin` class:
 
-* [`username`](#username)
-* [`first_name`](#first_name)
-* [`last_name`](#last_name)
-* [`email_address`](#email_address)
-* [`roles`](#roles)
-* [`password`](#password)
+* [`username`](#-nexus--config--admin--username)
+* [`first_name`](#-nexus--config--admin--first_name)
+* [`last_name`](#-nexus--config--admin--last_name)
+* [`email_address`](#-nexus--config--admin--email_address)
+* [`roles`](#-nexus--config--admin--roles)
+* [`password`](#-nexus--config--admin--password)
 
-##### <a name="username"></a>`username`
+##### <a name="-nexus--config--admin--username"></a>`username`
 
 Data type: `String[1]`
 
@@ -212,7 +212,7 @@ The username of the administrator.
 
 Default value: `'admin'`
 
-##### <a name="first_name"></a>`first_name`
+##### <a name="-nexus--config--admin--first_name"></a>`first_name`
 
 Data type: `String[1]`
 
@@ -220,7 +220,7 @@ The first name of the administrator.
 
 Default value: `'Administrator'`
 
-##### <a name="last_name"></a>`last_name`
+##### <a name="-nexus--config--admin--last_name"></a>`last_name`
 
 Data type: `String[1]`
 
@@ -228,7 +228,7 @@ The last name of the administrator.
 
 Default value: `'User'`
 
-##### <a name="email_address"></a>`email_address`
+##### <a name="-nexus--config--admin--email_address"></a>`email_address`
 
 Data type: `String[1]`
 
@@ -236,7 +236,7 @@ The email address of the administrator.
 
 Default value: `'admin@example.org'`
 
-##### <a name="roles"></a>`roles`
+##### <a name="-nexus--config--admin--roles"></a>`roles`
 
 Data type: `Array[String[1]]`
 
@@ -244,15 +244,15 @@ The assigned roles of the administrator. It should include 'nx-admin'.
 
 Default value: `['nx-admin']`
 
-##### <a name="password"></a>`password`
+##### <a name="-nexus--config--admin--password"></a>`password`
 
 Data type: `Optional[Variant[String[1], Sensitive[String[1]]]]`
 
 The password of the administrator. If not given there will be generated a random password.
 
-Default value: ``undef``
+Default value: `undef`
 
-### <a name="nexusconfiganonymous"></a>`nexus::config::anonymous`
+### <a name="nexus--config--anonymous"></a>`nexus::config::anonymous`
 
 Manage if anonymous user have access to nexus repository manager
 
@@ -268,19 +268,19 @@ include nexus::config::anonymous
 
 The following parameters are available in the `nexus::config::anonymous` class:
 
-* [`enabled`](#enabled)
-* [`user_id`](#user_id)
-* [`realm_name`](#realm_name)
+* [`enabled`](#-nexus--config--anonymous--enabled)
+* [`user_id`](#-nexus--config--anonymous--user_id)
+* [`realm_name`](#-nexus--config--anonymous--realm_name)
 
-##### <a name="enabled"></a>`enabled`
+##### <a name="-nexus--config--anonymous--enabled"></a>`enabled`
 
 Data type: `Boolean`
 
 Enable if anonymous/not logged in user have access to nexus repository manager.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="user_id"></a>`user_id`
+##### <a name="-nexus--config--anonymous--user_id"></a>`user_id`
 
 Data type: `String[1]`
 
@@ -288,7 +288,7 @@ The nexus repository manager user id/name used to determine access.
 
 Default value: `'anonymous'`
 
-##### <a name="realm_name"></a>`realm_name`
+##### <a name="-nexus--config--anonymous--realm_name"></a>`realm_name`
 
 Data type: `String[1]`
 
@@ -296,7 +296,7 @@ Realm name used for anonymous user.
 
 Default value: `'NexusAuthorizingRealm'`
 
-### <a name="nexusconfigdefault_repositories"></a>`nexus::config::default_repositories`
+### <a name="nexus--config--default_repositories"></a>`nexus::config::default_repositories`
 
 Removes the default repositories for maven and nuget
 
@@ -308,11 +308,11 @@ Removes the default repositories for maven and nuget
 include nexus::config::default_repositories
 ```
 
-### <a name="nexusconfigdevice"></a>`nexus::config::device`
+### <a name="nexus--config--device"></a>`nexus::config::device`
 
 Create puppet device config used to connect to the rest api
 
-### <a name="nexusconfigemail"></a>`nexus::config::email`
+### <a name="nexus--config--email"></a>`nexus::config::email`
 
 Manage the nexus repository manager email settings
 
@@ -328,28 +328,28 @@ include nexus::config::email
 
 The following parameters are available in the `nexus::config::email` class:
 
-* [`enabled`](#enabled)
-* [`host`](#host)
-* [`port`](#port)
-* [`username`](#username)
-* [`password`](#password)
-* [`from_address`](#from_address)
-* [`subject_prefix`](#subject_prefix)
-* [`start_tls_enabled`](#start_tls_enabled)
-* [`start_tls_required`](#start_tls_required)
-* [`ssl_on_connect_enabled`](#ssl_on_connect_enabled)
-* [`ssl_server_identity_check_enabled`](#ssl_server_identity_check_enabled)
-* [`nexus_trust_store_enabled`](#nexus_trust_store_enabled)
+* [`enabled`](#-nexus--config--email--enabled)
+* [`host`](#-nexus--config--email--host)
+* [`port`](#-nexus--config--email--port)
+* [`username`](#-nexus--config--email--username)
+* [`password`](#-nexus--config--email--password)
+* [`from_address`](#-nexus--config--email--from_address)
+* [`subject_prefix`](#-nexus--config--email--subject_prefix)
+* [`start_tls_enabled`](#-nexus--config--email--start_tls_enabled)
+* [`start_tls_required`](#-nexus--config--email--start_tls_required)
+* [`ssl_on_connect_enabled`](#-nexus--config--email--ssl_on_connect_enabled)
+* [`ssl_server_identity_check_enabled`](#-nexus--config--email--ssl_server_identity_check_enabled)
+* [`nexus_trust_store_enabled`](#-nexus--config--email--nexus_trust_store_enabled)
 
-##### <a name="enabled"></a>`enabled`
+##### <a name="-nexus--config--email--enabled"></a>`enabled`
 
 Data type: `Boolean`
 
 Enable to let nexus repository manager send emails.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="host"></a>`host`
+##### <a name="-nexus--config--email--host"></a>`host`
 
 Data type: `Stdlib::Host`
 
@@ -357,7 +357,7 @@ The smtp host to connect to.
 
 Default value: `'localhost'`
 
-##### <a name="port"></a>`port`
+##### <a name="-nexus--config--email--port"></a>`port`
 
 Data type: `Stdlib::Port`
 
@@ -365,7 +365,7 @@ The port to connect to send emails.
 
 Default value: `25`
 
-##### <a name="username"></a>`username`
+##### <a name="-nexus--config--email--username"></a>`username`
 
 Data type: `String`
 
@@ -373,15 +373,15 @@ The username to connect to the smtp server.
 
 Default value: `''`
 
-##### <a name="password"></a>`password`
+##### <a name="-nexus--config--email--password"></a>`password`
 
 Data type: `Optional[String]`
 
 The password to connect to the smtp server.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="from_address"></a>`from_address`
+##### <a name="-nexus--config--email--from_address"></a>`from_address`
 
 Data type: `String[1]`
 
@@ -389,7 +389,7 @@ The email address used to set as From-Header.
 
 Default value: `'nexus@example.org'`
 
-##### <a name="subject_prefix"></a>`subject_prefix`
+##### <a name="-nexus--config--email--subject_prefix"></a>`subject_prefix`
 
 Data type: `String`
 
@@ -397,47 +397,47 @@ Prefix which will be added to all emails.
 
 Default value: `''`
 
-##### <a name="start_tls_enabled"></a>`start_tls_enabled`
+##### <a name="-nexus--config--email--start_tls_enabled"></a>`start_tls_enabled`
 
 Data type: `Boolean`
 
 Enable STARTTLS support for insecure connections.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="start_tls_required"></a>`start_tls_required`
+##### <a name="-nexus--config--email--start_tls_required"></a>`start_tls_required`
 
 Data type: `Boolean`
 
 Require STARTTLS support.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="ssl_on_connect_enabled"></a>`ssl_on_connect_enabled`
+##### <a name="-nexus--config--email--ssl_on_connect_enabled"></a>`ssl_on_connect_enabled`
 
 Data type: `Boolean`
 
 Enable SSL/TLS encryption upon connection.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="ssl_server_identity_check_enabled"></a>`ssl_server_identity_check_enabled`
+##### <a name="-nexus--config--email--ssl_server_identity_check_enabled"></a>`ssl_server_identity_check_enabled`
 
 Data type: `Boolean`
 
 Enable server identity check.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="nexus_trust_store_enabled"></a>`nexus_trust_store_enabled`
+##### <a name="-nexus--config--email--nexus_trust_store_enabled"></a>`nexus_trust_store_enabled`
 
 Data type: `Boolean`
 
 Use certificates stored in the Nexus truststore to connect to external systems.
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="nexusconfigproperties"></a>`nexus::config::properties`
+### <a name="nexus--config--properties"></a>`nexus::config::properties`
 
 A description of what this class does
 
@@ -449,7 +449,7 @@ A description of what this class does
 include nexus::config::properties
 ```
 
-### <a name="nexusplugincomposer"></a>`nexus::plugin::composer`
+### <a name="nexus--plugin--composer"></a>`nexus::plugin::composer`
 
 Install the composer repository format plugin
 
@@ -470,9 +470,9 @@ class { 'nexus::plugin::composer':
 
 The following parameters are available in the `nexus::plugin::composer` class:
 
-* [`version`](#version)
+* [`version`](#-nexus--plugin--composer--version)
 
-##### <a name="version"></a>`version`
+##### <a name="-nexus--plugin--composer--version"></a>`version`
 
 Data type: `Pattern[/\d+.\d+.\d+/]`
 
@@ -480,7 +480,7 @@ The composer repository format plugin version.
 
 ## Defined types
 
-### <a name="nexusresourceblobstorefile"></a>`nexus::resource::blobstore::file`
+### <a name="nexus--resource--blobstore--file"></a>`nexus::resource::blobstore::file`
 
 Resource to manage (local) file blobstore
 
@@ -496,10 +496,10 @@ nexus::blobstore::file { 'apt-hosted': }
 
 The following parameters are available in the `nexus::resource::blobstore::file` defined type:
 
-* [`ensure`](#ensure)
-* [`path`](#path)
+* [`ensure`](#-nexus--resource--blobstore--file--ensure)
+* [`path`](#-nexus--resource--blobstore--file--path)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--blobstore--file--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -507,7 +507,7 @@ Define if the resource should be created/present or deleted/absent
 
 Default value: `'present'`
 
-##### <a name="path"></a>`path`
+##### <a name="-nexus--resource--blobstore--file--path"></a>`path`
 
 Data type: `Variant[Stdlib::Absolutepath, String[1]]`
 
@@ -516,7 +516,7 @@ working directory as base path. The nexus (service) user needs write access to t
 
 Default value: `$title`
 
-### <a name="nexusresourcerepositoryaptproxy"></a>`nexus::resource::repository::apt::proxy`
+### <a name="nexus--resource--repository--apt--proxy"></a>`nexus::resource::repository::apt::proxy`
 
 Resource to manage apt proxy repository
 
@@ -535,42 +535,42 @@ nexus::repository::apt::proxy { 'apt-debian':
 
 The following parameters are available in the `nexus::resource::repository::apt::proxy` defined type:
 
-* [`apt_distribution`](#apt_distribution)
-* [`proxy_remote_url`](#proxy_remote_url)
-* [`apt_flat`](#apt_flat)
-* [`ensure`](#ensure)
-* [`http_client_auto_block`](#http_client_auto_block)
-* [`http_client_blocked`](#http_client_blocked)
-* [`negative_cache_enabled`](#negative_cache_enabled)
-* [`negative_cache_time_to_live`](#negative_cache_time_to_live)
-* [`online`](#online)
-* [`proxy_content_max_age`](#proxy_content_max_age)
-* [`proxy_metadata_max_age`](#proxy_metadata_max_age)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
+* [`apt_distribution`](#-nexus--resource--repository--apt--proxy--apt_distribution)
+* [`proxy_remote_url`](#-nexus--resource--repository--apt--proxy--proxy_remote_url)
+* [`apt_flat`](#-nexus--resource--repository--apt--proxy--apt_flat)
+* [`ensure`](#-nexus--resource--repository--apt--proxy--ensure)
+* [`http_client_auto_block`](#-nexus--resource--repository--apt--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--apt--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--apt--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--apt--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--apt--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--apt--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--apt--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--apt--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--apt--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--apt--proxy--storage_write_policy)
 
-##### <a name="apt_distribution"></a>`apt_distribution`
+##### <a name="-nexus--resource--repository--apt--proxy--apt_distribution"></a>`apt_distribution`
 
 Data type: `String[1]`
 
 APT distribution like buster, bullseye used by nexus repository manager to query the upstream repository.
 
-##### <a name="proxy_remote_url"></a>`proxy_remote_url`
+##### <a name="-nexus--resource--repository--apt--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
 Data type: `Stdlib::HTTPUrl`
 
 APT repository url like https://deb.debian.org/debian/.
 
-##### <a name="apt_flat"></a>`apt_flat`
+##### <a name="-nexus--resource--repository--apt--proxy--apt_flat"></a>`apt_flat`
 
 Data type: `Boolean`
 
 Is the upstream repository flat format?
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--apt--proxy--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -578,31 +578,31 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="http_client_auto_block"></a>`http_client_auto_block`
+##### <a name="-nexus--resource--repository--apt--proxy--http_client_auto_block"></a>`http_client_auto_block`
 
 Data type: `Boolean`
 
 Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="http_client_blocked"></a>`http_client_blocked`
+##### <a name="-nexus--resource--repository--apt--proxy--http_client_blocked"></a>`http_client_blocked`
 
 Data type: `Boolean`
 
 Block outbound connections on the repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="negative_cache_enabled"></a>`negative_cache_enabled`
+##### <a name="-nexus--resource--repository--apt--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
 
 Data type: `Boolean`
 
 Cache responses for content not present in the proxied repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+##### <a name="-nexus--resource--repository--apt--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
 
 Data type: `Integer`
 
@@ -610,15 +610,15 @@ How long to cache the fact that a file was not found in the repository (in minut
 
 Default value: `1440`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--apt--proxy--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="proxy_content_max_age"></a>`proxy_content_max_age`
+##### <a name="-nexus--resource--repository--apt--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
 
 Data type: `Integer`
 
@@ -626,7 +626,7 @@ Max age of content (packages)
 
 Default value: `1440`
 
-##### <a name="proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+##### <a name="-nexus--resource--repository--apt--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
 
 Data type: `Integer`
 
@@ -634,7 +634,7 @@ Max age of the repository metadata
 
 Default value: `1440`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--apt--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -643,15 +643,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--apt--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--apt--proxy--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW']`
 
@@ -659,7 +659,7 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'ALLOW'`
 
-### <a name="nexusresourcerepositorydockergroup"></a>`nexus::resource::repository::docker::group`
+### <a name="nexus--resource--repository--docker--group"></a>`nexus::resource::repository::docker::group`
 
 Resource to manage docker group repository
 
@@ -680,17 +680,17 @@ nexus::repository::docker::group { 'docker-group':
 
 The following parameters are available in the `nexus::resource::repository::docker::group` defined type:
 
-* [`ensure`](#ensure)
-* [`online`](#online)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`group_member_names`](#group_member_names)
-* [`docker_v1_enabled`](#docker_v1_enabled)
-* [`docker_force_basic_auth`](#docker_force_basic_auth)
-* [`docker_http_port`](#docker_http_port)
-* [`docker_https_port`](#docker_https_port)
+* [`ensure`](#-nexus--resource--repository--docker--group--ensure)
+* [`online`](#-nexus--resource--repository--docker--group--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--docker--group--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--docker--group--storage_strict_content_type_validation)
+* [`group_member_names`](#-nexus--resource--repository--docker--group--group_member_names)
+* [`docker_v1_enabled`](#-nexus--resource--repository--docker--group--docker_v1_enabled)
+* [`docker_force_basic_auth`](#-nexus--resource--repository--docker--group--docker_force_basic_auth)
+* [`docker_http_port`](#-nexus--resource--repository--docker--group--docker_http_port)
+* [`docker_https_port`](#-nexus--resource--repository--docker--group--docker_https_port)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--docker--group--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -698,15 +698,15 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--docker--group--online"></a>`online`
 
 Data type: `Boolean`
 
 Allow incoming requests to this repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--docker--group--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -715,15 +715,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--docker--group--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="group_member_names"></a>`group_member_names`
+##### <a name="-nexus--resource--repository--docker--group--group_member_names"></a>`group_member_names`
 
 Data type: `Array[String[1]]`
 
@@ -731,39 +731,39 @@ Ordered array of the (docker) member to be grouped into this repository.
 
 Default value: `[]`
 
-##### <a name="docker_v1_enabled"></a>`docker_v1_enabled`
+##### <a name="-nexus--resource--repository--docker--group--docker_v1_enabled"></a>`docker_v1_enabled`
 
 Data type: `Boolean`
 
 Allow clients to use the V1 API to interact with this repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="docker_force_basic_auth"></a>`docker_force_basic_auth`
+##### <a name="-nexus--resource--repository--docker--group--docker_force_basic_auth"></a>`docker_force_basic_auth`
 
 Data type: `Boolean`
 
 Allow anonymous docker pull ( Docker Bearer Token Realm required ).
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="docker_http_port"></a>`docker_http_port`
+##### <a name="-nexus--resource--repository--docker--group--docker_http_port"></a>`docker_http_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTP connector at specified port. Normally used if the server is behind a secure proxy.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="docker_https_port"></a>`docker_https_port`
+##### <a name="-nexus--resource--repository--docker--group--docker_https_port"></a>`docker_https_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 
-Default value: ``undef``
+Default value: `undef`
 
-### <a name="nexusresourcerepositorydockerhosted"></a>`nexus::resource::repository::docker::hosted`
+### <a name="nexus--resource--repository--docker--hosted"></a>`nexus::resource::repository::docker::hosted`
 
 Resource to manage docker hosted repository
 
@@ -780,18 +780,18 @@ nexus::repository::docker::hosted { 'docker-hosted':
 
 The following parameters are available in the `nexus::resource::repository::docker::hosted` defined type:
 
-* [`ensure`](#ensure)
-* [`online`](#online)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
-* [`docker_v1_enabled`](#docker_v1_enabled)
-* [`docker_force_basic_auth`](#docker_force_basic_auth)
-* [`docker_http_port`](#docker_http_port)
-* [`docker_https_port`](#docker_https_port)
-* [`component_proprietary_components`](#component_proprietary_components)
+* [`ensure`](#-nexus--resource--repository--docker--hosted--ensure)
+* [`online`](#-nexus--resource--repository--docker--hosted--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--docker--hosted--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--docker--hosted--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--docker--hosted--storage_write_policy)
+* [`component_proprietary_components`](#-nexus--resource--repository--docker--hosted--component_proprietary_components)
+* [`docker_v1_enabled`](#-nexus--resource--repository--docker--hosted--docker_v1_enabled)
+* [`docker_force_basic_auth`](#-nexus--resource--repository--docker--hosted--docker_force_basic_auth)
+* [`docker_http_port`](#-nexus--resource--repository--docker--hosted--docker_http_port)
+* [`docker_https_port`](#-nexus--resource--repository--docker--hosted--docker_https_port)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--docker--hosted--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -799,15 +799,15 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--docker--hosted--online"></a>`online`
 
 Data type: `Boolean`
 
 Allow incoming requests to this repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--docker--hosted--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -816,15 +816,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--docker--hosted--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--docker--hosted--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
 
@@ -832,47 +832,47 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'ALLOW_ONCE'`
 
-##### <a name="docker_v1_enabled"></a>`docker_v1_enabled`
+##### <a name="-nexus--resource--repository--docker--hosted--component_proprietary_components"></a>`component_proprietary_components`
+
+Data type: `Boolean`
+
+Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--docker--hosted--docker_v1_enabled"></a>`docker_v1_enabled`
 
 Data type: `Boolean`
 
 Allow clients to use the V1 API to interact with this repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="docker_force_basic_auth"></a>`docker_force_basic_auth`
+##### <a name="-nexus--resource--repository--docker--hosted--docker_force_basic_auth"></a>`docker_force_basic_auth`
 
 Data type: `Boolean`
 
 Allow anonymous docker pull ( Docker Bearer Token Realm required ).
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="docker_http_port"></a>`docker_http_port`
+##### <a name="-nexus--resource--repository--docker--hosted--docker_http_port"></a>`docker_http_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTP connector at specified port. Normally used if the server is behind a secure proxy.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="docker_https_port"></a>`docker_https_port`
+##### <a name="-nexus--resource--repository--docker--hosted--docker_https_port"></a>`docker_https_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="component_proprietary_components"></a>`component_proprietary_components`
-
-Data type: `Boolean`
-
-
-
-Default value: ``true``
-
-### <a name="nexusresourcerepositorydockerproxy"></a>`nexus::resource::repository::docker::proxy`
+### <a name="nexus--resource--repository--docker--proxy"></a>`nexus::resource::repository::docker::proxy`
 
 Resource to manage docker proxy repository
 
@@ -890,34 +890,35 @@ nexus::repository::docker::proxy { 'docker-docker.io':
 
 The following parameters are available in the `nexus::resource::repository::docker::proxy` defined type:
 
-* [`proxy_remote_url`](#proxy_remote_url)
-* [`ensure`](#ensure)
-* [`http_client_auto_block`](#http_client_auto_block)
-* [`http_client_blocked`](#http_client_blocked)
-* [`negative_cache_enabled`](#negative_cache_enabled)
-* [`negative_cache_time_to_live`](#negative_cache_time_to_live)
-* [`online`](#online)
-* [`proxy_content_max_age`](#proxy_content_max_age)
-* [`proxy_metadata_max_age`](#proxy_metadata_max_age)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
-* [`docker_v1_enabled`](#docker_v1_enabled)
-* [`docker_force_basic_auth`](#docker_force_basic_auth)
-* [`docker_http_port`](#docker_http_port)
-* [`docker_https_port`](#docker_https_port)
-* [`docker_proxy_index_type`](#docker_proxy_index_type)
-* [`docker_proxy_index_url`](#docker_proxy_index_url)
-* [`npm_remove_non_cataloged`](#npm_remove_non_cataloged)
-* [`npm_remove_quarantined`](#npm_remove_quarantined)
+* [`proxy_remote_url`](#-nexus--resource--repository--docker--proxy--proxy_remote_url)
+* [`ensure`](#-nexus--resource--repository--docker--proxy--ensure)
+* [`http_client_auto_block`](#-nexus--resource--repository--docker--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--docker--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--docker--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--docker--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--docker--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--docker--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--docker--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--docker--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--docker--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--docker--proxy--storage_write_policy)
+* [`docker_v1_enabled`](#-nexus--resource--repository--docker--proxy--docker_v1_enabled)
+* [`docker_force_basic_auth`](#-nexus--resource--repository--docker--proxy--docker_force_basic_auth)
+* [`docker_http_port`](#-nexus--resource--repository--docker--proxy--docker_http_port)
+* [`docker_https_port`](#-nexus--resource--repository--docker--proxy--docker_https_port)
+* [`docker_subdomain`](#-nexus--resource--repository--docker--proxy--docker_subdomain)
+* [`docker_proxy_index_type`](#-nexus--resource--repository--docker--proxy--docker_proxy_index_type)
+* [`docker_proxy_index_url`](#-nexus--resource--repository--docker--proxy--docker_proxy_index_url)
+* [`docker_proxy_cache_foreign_layers`](#-nexus--resource--repository--docker--proxy--docker_proxy_cache_foreign_layers)
+* [`docker_proxy_foreign_layer_url_whitelist`](#-nexus--resource--repository--docker--proxy--docker_proxy_foreign_layer_url_whitelist)
 
-##### <a name="proxy_remote_url"></a>`proxy_remote_url`
+##### <a name="-nexus--resource--repository--docker--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
 Data type: `Stdlib::HTTPSUrl`
 
 Docker repository url like https://registry-1.docker.io.
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--docker--proxy--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -925,31 +926,31 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="http_client_auto_block"></a>`http_client_auto_block`
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_auto_block"></a>`http_client_auto_block`
 
 Data type: `Boolean`
 
 Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="http_client_blocked"></a>`http_client_blocked`
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_blocked"></a>`http_client_blocked`
 
 Data type: `Boolean`
 
 Block outbound connections on the repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="negative_cache_enabled"></a>`negative_cache_enabled`
+##### <a name="-nexus--resource--repository--docker--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
 
 Data type: `Boolean`
 
 Cache responses for content not present in the proxied repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+##### <a name="-nexus--resource--repository--docker--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
 
 Data type: `Integer`
 
@@ -957,15 +958,15 @@ How long to cache the fact that a file was not found in the repository (in minut
 
 Default value: `1440`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--docker--proxy--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="proxy_content_max_age"></a>`proxy_content_max_age`
+##### <a name="-nexus--resource--repository--docker--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
 
 Data type: `Integer`
 
@@ -973,7 +974,7 @@ Max age of content (packages).
 
 Default value: `1440`
 
-##### <a name="proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+##### <a name="-nexus--resource--repository--docker--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
 
 Data type: `Integer`
 
@@ -981,7 +982,7 @@ Max age of the repository metadata.
 
 Default value: `1440`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--docker--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -990,15 +991,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--docker--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--docker--proxy--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
 
@@ -1006,39 +1007,47 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'ALLOW'`
 
-##### <a name="docker_v1_enabled"></a>`docker_v1_enabled`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_v1_enabled"></a>`docker_v1_enabled`
 
 Data type: `Boolean`
 
 Allow clients to use the V1 API to interact with this repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="docker_force_basic_auth"></a>`docker_force_basic_auth`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_force_basic_auth"></a>`docker_force_basic_auth`
 
 Data type: `Boolean`
 
 Allow anonymous docker pull ( Docker Bearer Token Realm required ).
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="docker_http_port"></a>`docker_http_port`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_http_port"></a>`docker_http_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTP connector at specified port. Normally used if the server is behind a secure proxy.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="docker_https_port"></a>`docker_https_port`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_https_port"></a>`docker_https_port`
 
 Data type: `Optional[Stdlib::Port]`
 
 Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="docker_proxy_index_type"></a>`docker_proxy_index_type`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_subdomain"></a>`docker_subdomain`
+
+Data type: `Optional[Stdlib::Fqdn]`
+
+Use the following subdomain to make push and pull requests for this repository.
+
+Default value: `undef`
+
+##### <a name="-nexus--resource--repository--docker--proxy--docker_proxy_index_type"></a>`docker_proxy_index_type`
 
 Data type: `Enum['REGISTRY','HUB','CUSTOM']`
 
@@ -1046,31 +1055,31 @@ Docker index type. See https://help.sonatype.com/repomanager3/nexus-repository-a
 
 Default value: `'HUB'`
 
-##### <a name="docker_proxy_index_url"></a>`docker_proxy_index_url`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_proxy_index_url"></a>`docker_proxy_index_url`
 
 Data type: `Optional[Stdlib::HTTPSUrl]`
 
 If docker_proxy_index_type is CUSTOM you have to set the uri of the index api.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="npm_remove_non_cataloged"></a>`npm_remove_non_cataloged`
-
-Data type: `Boolean`
-
-
-
-Default value: ``false``
-
-##### <a name="npm_remove_quarantined"></a>`npm_remove_quarantined`
+##### <a name="-nexus--resource--repository--docker--proxy--docker_proxy_cache_foreign_layers"></a>`docker_proxy_cache_foreign_layers`
 
 Data type: `Boolean`
 
+Allow Nexus Repository Manager to download and cache foreign layers.
 
+Default value: `false`
 
-Default value: ``false``
+##### <a name="-nexus--resource--repository--docker--proxy--docker_proxy_foreign_layer_url_whitelist"></a>`docker_proxy_foreign_layer_url_whitelist`
 
-### <a name="nexusresourcerepositorynpmgroup"></a>`nexus::resource::repository::npm::group`
+Data type: `Array[String[1]]`
+
+Regular expressions used to identify URLs that are allowed for foreign layer requests.
+
+Default value: `[]`
+
+### <a name="nexus--resource--repository--npm--group"></a>`nexus::resource::repository::npm::group`
 
 Resource to manage npm group repository
 
@@ -1091,13 +1100,13 @@ nexus::repository::npm::group { 'npm-group':
 
 The following parameters are available in the `nexus::resource::repository::npm::group` defined type:
 
-* [`ensure`](#ensure)
-* [`online`](#online)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`group_member_names`](#group_member_names)
+* [`ensure`](#-nexus--resource--repository--npm--group--ensure)
+* [`online`](#-nexus--resource--repository--npm--group--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--npm--group--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--npm--group--storage_strict_content_type_validation)
+* [`group_member_names`](#-nexus--resource--repository--npm--group--group_member_names)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--npm--group--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -1105,15 +1114,15 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--npm--group--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--npm--group--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -1122,15 +1131,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--npm--group--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="group_member_names"></a>`group_member_names`
+##### <a name="-nexus--resource--repository--npm--group--group_member_names"></a>`group_member_names`
 
 Data type: `Array[String[1]]`
 
@@ -1138,7 +1147,7 @@ Ordered array of the (npm) member to be grouped into this repository.
 
 Default value: `[]`
 
-### <a name="nexusresourcerepositorynpmhosted"></a>`nexus::resource::repository::npm::hosted`
+### <a name="nexus--resource--repository--npm--hosted"></a>`nexus::resource::repository::npm::hosted`
 
 Resource to manage npm hosted repository
 
@@ -1154,14 +1163,14 @@ nexus::repository::npm::hosted { 'npm-hosted': }
 
 The following parameters are available in the `nexus::resource::repository::npm::hosted` defined type:
 
-* [`ensure`](#ensure)
-* [`online`](#online)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
-* [`component_proprietary_components`](#component_proprietary_components)
+* [`ensure`](#-nexus--resource--repository--npm--hosted--ensure)
+* [`online`](#-nexus--resource--repository--npm--hosted--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--npm--hosted--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--npm--hosted--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--npm--hosted--storage_write_policy)
+* [`component_proprietary_components`](#-nexus--resource--repository--npm--hosted--component_proprietary_components)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--npm--hosted--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -1169,15 +1178,15 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--npm--hosted--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--npm--hosted--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -1186,15 +1195,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--npm--hosted--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--npm--hosted--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['allow_once']`
 
@@ -1202,15 +1211,15 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'allow_once'`
 
-##### <a name="component_proprietary_components"></a>`component_proprietary_components`
+##### <a name="-nexus--resource--repository--npm--hosted--component_proprietary_components"></a>`component_proprietary_components`
 
 Data type: `Boolean`
 
 Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
 
-Default value: ``true``
+Default value: `true`
 
-### <a name="nexusresourcerepositorynpmproxy"></a>`nexus::resource::repository::npm::proxy`
+### <a name="nexus--resource--repository--npm--proxy"></a>`nexus::resource::repository::npm::proxy`
 
 Resource to manage npm proxy repository
 
@@ -1228,28 +1237,28 @@ nexus::repository::npm::proxy { 'npm-npmjs.org':
 
 The following parameters are available in the `nexus::resource::repository::npm::proxy` defined type:
 
-* [`proxy_remote_url`](#proxy_remote_url)
-* [`ensure`](#ensure)
-* [`npm_remove_non_cataloged`](#npm_remove_non_cataloged)
-* [`npm_remove_quarantined`](#npm_remove_quarantined)
-* [`http_client_auto_block`](#http_client_auto_block)
-* [`http_client_blocked`](#http_client_blocked)
-* [`negative_cache_enabled`](#negative_cache_enabled)
-* [`negative_cache_time_to_live`](#negative_cache_time_to_live)
-* [`online`](#online)
-* [`proxy_content_max_age`](#proxy_content_max_age)
-* [`proxy_metadata_max_age`](#proxy_metadata_max_age)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
+* [`proxy_remote_url`](#-nexus--resource--repository--npm--proxy--proxy_remote_url)
+* [`ensure`](#-nexus--resource--repository--npm--proxy--ensure)
+* [`npm_remove_non_cataloged`](#-nexus--resource--repository--npm--proxy--npm_remove_non_cataloged)
+* [`npm_remove_quarantined`](#-nexus--resource--repository--npm--proxy--npm_remove_quarantined)
+* [`http_client_auto_block`](#-nexus--resource--repository--npm--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--npm--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--npm--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--npm--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--npm--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--npm--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--npm--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--npm--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--npm--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--npm--proxy--storage_write_policy)
 
-##### <a name="proxy_remote_url"></a>`proxy_remote_url`
+##### <a name="-nexus--resource--repository--npm--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
 Data type: `Stdlib::HTTPSUrl`
 
 NPM repository url like https://registry.npmjs.org.
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--npm--proxy--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -1257,47 +1266,47 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="npm_remove_non_cataloged"></a>`npm_remove_non_cataloged`
+##### <a name="-nexus--resource--repository--npm--proxy--npm_remove_non_cataloged"></a>`npm_remove_non_cataloged`
 
 Data type: `Boolean`
 
 Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="npm_remove_quarantined"></a>`npm_remove_quarantined`
+##### <a name="-nexus--resource--repository--npm--proxy--npm_remove_quarantined"></a>`npm_remove_quarantined`
 
 Data type: `Boolean`
 
 Remove quarantined versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="http_client_auto_block"></a>`http_client_auto_block`
+##### <a name="-nexus--resource--repository--npm--proxy--http_client_auto_block"></a>`http_client_auto_block`
 
 Data type: `Boolean`
 
 Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="http_client_blocked"></a>`http_client_blocked`
+##### <a name="-nexus--resource--repository--npm--proxy--http_client_blocked"></a>`http_client_blocked`
 
 Data type: `Boolean`
 
 Block outbound connections on the repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="negative_cache_enabled"></a>`negative_cache_enabled`
+##### <a name="-nexus--resource--repository--npm--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
 
 Data type: `Boolean`
 
 Cache responses for content not present in the proxied repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+##### <a name="-nexus--resource--repository--npm--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
 
 Data type: `Integer`
 
@@ -1305,15 +1314,15 @@ How long to cache the fact that a file was not found in the repository (in minut
 
 Default value: `1440`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--npm--proxy--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="proxy_content_max_age"></a>`proxy_content_max_age`
+##### <a name="-nexus--resource--repository--npm--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
 
 Data type: `Integer`
 
@@ -1321,7 +1330,7 @@ Max age of content (packages).
 
 Default value: `1440`
 
-##### <a name="proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+##### <a name="-nexus--resource--repository--npm--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
 
 Data type: `Integer`
 
@@ -1329,7 +1338,7 @@ Max age of the repository metadata.
 
 Default value: `1440`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--npm--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -1338,15 +1347,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--npm--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--npm--proxy--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
 
@@ -1354,7 +1363,7 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'ALLOW'`
 
-### <a name="nexusresourcerepositoryyumhosted"></a>`nexus::resource::repository::yum::hosted`
+### <a name="nexus--resource--repository--yum--hosted"></a>`nexus::resource::repository::yum::hosted`
 
 Resource to manage yum hosted repository
 
@@ -1372,16 +1381,16 @@ nexus::resource::repository::yum::hosted { 'yum-hosted':
 
 The following parameters are available in the `nexus::resource::repository::yum::hosted` defined type:
 
-* [`ensure`](#ensure)
-* [`online`](#online)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
-* [`component_proprietary_components`](#component_proprietary_components)
-* [`repodata_depth`](#repodata_depth)
-* [`deploy_policy`](#deploy_policy)
+* [`ensure`](#-nexus--resource--repository--yum--hosted--ensure)
+* [`online`](#-nexus--resource--repository--yum--hosted--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--yum--hosted--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--yum--hosted--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--yum--hosted--storage_write_policy)
+* [`component_proprietary_components`](#-nexus--resource--repository--yum--hosted--component_proprietary_components)
+* [`repodata_depth`](#-nexus--resource--repository--yum--hosted--repodata_depth)
+* [`deploy_policy`](#-nexus--resource--repository--yum--hosted--deploy_policy)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--yum--hosted--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -1389,15 +1398,15 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--yum--hosted--online"></a>`online`
 
 Data type: `Boolean`
 
 Allow incoming requests to this repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--yum--hosted--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -1406,15 +1415,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--yum--hosted--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--yum--hosted--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
 
@@ -1422,15 +1431,15 @@ Controls if deployments of and updates to artifacts are allowed.
 
 Default value: `'ALLOW_ONCE'`
 
-##### <a name="component_proprietary_components"></a>`component_proprietary_components`
+##### <a name="-nexus--resource--repository--yum--hosted--component_proprietary_components"></a>`component_proprietary_components`
 
 Data type: `Boolean`
 
 Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="repodata_depth"></a>`repodata_depth`
+##### <a name="-nexus--resource--repository--yum--hosted--repodata_depth"></a>`repodata_depth`
 
 Data type: `Integer`
 
@@ -1438,7 +1447,7 @@ Set the depth of the directory in which the repodata/repomd.xml will be generate
 
 Default value: `0`
 
-##### <a name="deploy_policy"></a>`deploy_policy`
+##### <a name="-nexus--resource--repository--yum--hosted--deploy_policy"></a>`deploy_policy`
 
 Data type: `Enum['STRICT','PERMISSIVE']`
 
@@ -1446,7 +1455,7 @@ Set the deploy policy, whether or not a redeploy of rpm's is allowed.
 
 Default value: `'STRICT'`
 
-### <a name="nexusresourcerepositoryyumproxy"></a>`nexus::resource::repository::yum::proxy`
+### <a name="nexus--resource--repository--yum--proxy"></a>`nexus::resource::repository::yum::proxy`
 
 Resource to manage yum proxy repository
 
@@ -1464,26 +1473,26 @@ nexus::resource::repository::yum::proxy { 'yum-oracle-latest':
 
 The following parameters are available in the `nexus::resource::repository::yum::proxy` defined type:
 
-* [`proxy_remote_url`](#proxy_remote_url)
-* [`ensure`](#ensure)
-* [`http_client_auto_block`](#http_client_auto_block)
-* [`http_client_blocked`](#http_client_blocked)
-* [`negative_cache_enabled`](#negative_cache_enabled)
-* [`negative_cache_time_to_live`](#negative_cache_time_to_live)
-* [`online`](#online)
-* [`proxy_content_max_age`](#proxy_content_max_age)
-* [`proxy_metadata_max_age`](#proxy_metadata_max_age)
-* [`storage_blob_store_name`](#storage_blob_store_name)
-* [`storage_strict_content_type_validation`](#storage_strict_content_type_validation)
-* [`storage_write_policy`](#storage_write_policy)
+* [`proxy_remote_url`](#-nexus--resource--repository--yum--proxy--proxy_remote_url)
+* [`ensure`](#-nexus--resource--repository--yum--proxy--ensure)
+* [`http_client_auto_block`](#-nexus--resource--repository--yum--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--yum--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--yum--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--yum--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--yum--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--yum--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--yum--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--yum--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--yum--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--yum--proxy--storage_write_policy)
 
-##### <a name="proxy_remote_url"></a>`proxy_remote_url`
+##### <a name="-nexus--resource--repository--yum--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
 Data type: `Stdlib::HTTPSUrl`
 
 yum repository url like https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/.
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-nexus--resource--repository--yum--proxy--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -1491,31 +1500,31 @@ Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
 
-##### <a name="http_client_auto_block"></a>`http_client_auto_block`
+##### <a name="-nexus--resource--repository--yum--proxy--http_client_auto_block"></a>`http_client_auto_block`
 
 Data type: `Boolean`
 
 Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="http_client_blocked"></a>`http_client_blocked`
+##### <a name="-nexus--resource--repository--yum--proxy--http_client_blocked"></a>`http_client_blocked`
 
 Data type: `Boolean`
 
 Block outbound connections on the repository.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="negative_cache_enabled"></a>`negative_cache_enabled`
+##### <a name="-nexus--resource--repository--yum--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
 
 Data type: `Boolean`
 
 Cache responses for content not present in the proxied repository.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+##### <a name="-nexus--resource--repository--yum--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
 
 Data type: `Integer`
 
@@ -1523,15 +1532,15 @@ How long to cache the fact that a file was not found in the repository (in minut
 
 Default value: `1440`
 
-##### <a name="online"></a>`online`
+##### <a name="-nexus--resource--repository--yum--proxy--online"></a>`online`
 
 Data type: `Boolean`
 
 Enable this repository in nexus repository manager that it can be used.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="proxy_content_max_age"></a>`proxy_content_max_age`
+##### <a name="-nexus--resource--repository--yum--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
 
 Data type: `Integer`
 
@@ -1539,7 +1548,7 @@ Max age of content (packages)
 
 Default value: `1440`
 
-##### <a name="proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+##### <a name="-nexus--resource--repository--yum--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
 
 Data type: `Integer`
 
@@ -1547,7 +1556,7 @@ Max age of the repository metadata
 
 Default value: `1440`
 
-##### <a name="storage_blob_store_name"></a>`storage_blob_store_name`
+##### <a name="-nexus--resource--repository--yum--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
 
 Data type: `String[1]`
 
@@ -1556,15 +1565,15 @@ defined repository.
 
 Default value: `$title`
 
-##### <a name="storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+##### <a name="-nexus--resource--repository--yum--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
 
 Data type: `Boolean`
 
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="storage_write_policy"></a>`storage_write_policy`
+##### <a name="-nexus--resource--repository--yum--proxy--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW']`
 
@@ -1608,9 +1617,9 @@ Blobstore type.
 
 The following parameters are available in the `nexus_blobstore` type.
 
-* [`name`](#name)
+* [`name`](#-nexus_blobstore--name)
 
-##### <a name="name"></a>`name`
+##### <a name="-nexus_blobstore--name"></a>`name`
 
 namevar
 
@@ -1658,9 +1667,9 @@ Repository type.
 
 The following parameters are available in the `nexus_repository` type.
 
-* [`name`](#name)
+* [`name`](#-nexus_repository--name)
 
-##### <a name="name"></a>`name`
+##### <a name="-nexus_repository--name"></a>`name`
 
 namevar
 
@@ -1696,9 +1705,9 @@ Default value: `present`
 
 The following parameters are available in the `nexus_setting` type.
 
-* [`name`](#name)
+* [`name`](#-nexus_setting--name)
 
-##### <a name="name"></a>`name`
+##### <a name="-nexus_setting--name"></a>`name`
 
 namevar
 
@@ -1797,9 +1806,9 @@ Default value: `active`
 
 The following parameters are available in the `nexus_user` type.
 
-* [`user_id`](#user_id)
+* [`user_id`](#-nexus_user--user_id)
 
-##### <a name="user_id"></a>`user_id`
+##### <a name="-nexus_user--user_id"></a>`user_id`
 
 namevar
 
