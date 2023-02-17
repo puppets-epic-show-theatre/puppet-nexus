@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0]
+### Added
+- `docker_subdomain` in `nexus::resource::repository::docker::proxy`
+- `docker_proxy_cache_foreign_layers` in `nexus::resource::repository::docker::proxy`
+- `docker_proxy_foreign_layer_url_whitelist` in `nexus::resource::repository::docker::proxy`
+
+### Changed
+- Changes by `pdk update`
+- Changes by `pdk validate -a`
+- Updated `README.md` to reflect current module usage
+
+### Removed
+- Unused `npm_remove_non_cataloged` in `nexus::resource::repository::docker::proxy`
+- Unused `npm_remove_quarantined` in `nexus::resource::repository::docker::proxy`
+
 ## [3.4.0]
 ### Added
 - `nexus::resource::repository::yum::hosted` to manage yum hosted repositories
