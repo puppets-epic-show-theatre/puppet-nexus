@@ -11,6 +11,8 @@
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 # @param storage_write_policy
 #   Controls if deployments of and updates to artifacts are allowed.
+# @param component_proprietary_components
+#   Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
 # @param docker_v1_enabled
 #   Allow clients to use the V1 API to interact with this repository.
 # @param docker_force_basic_auth
@@ -57,6 +59,6 @@ define nexus::resource::repository::docker::hosted (
         'httpPort'       => $docker_http_port,
         'httpsPort'      => $docker_https_port,
       },
-    }
+    },
   }
 }

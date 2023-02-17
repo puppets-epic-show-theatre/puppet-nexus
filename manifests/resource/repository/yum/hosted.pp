@@ -52,6 +52,6 @@ define nexus::resource::repository::yum::hosted (
         'repodataDepth' => $repodata_depth,
         'deployPolicy'  => $deploy_policy,
       },
-    }
+    },
   }
 }

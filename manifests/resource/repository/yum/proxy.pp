@@ -54,7 +54,7 @@ define nexus::resource::repository::yum::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy
+        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {
@@ -64,7 +64,7 @@ define nexus::resource::repository::yum::proxy (
       },
       'negativeCache'   => {
         'enabled'    => $negative_cache_enabled,
-        'timeToLive' => $negative_cache_time_to_live
+        'timeToLive' => $negative_cache_time_to_live,
       },
       'httpClient'      => {
         'blocked'        => $http_client_blocked,
@@ -75,11 +75,11 @@ define nexus::resource::repository::yum::proxy (
           'timeout'                 => undef,
           'enableCircularRedirects' => false,
           'enableCookies'           => false,
-          'useTrustStore'           => false
+          'useTrustStore'           => false,
         },
-        'authentication' => undef
+        'authentication' => undef,
       },
-      'routingRuleName' => undef
+      'routingRuleName' => undef,
     },
   }
 }

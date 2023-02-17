@@ -14,24 +14,24 @@ class nexus::config::properties {
   # Nexus >=3.x do no necesarily have a properties file in place to
   # modify. Make sure that there is at least a minmal file there
   file { $nexus_properties_file:
-    ensure => present,
+    ensure => file,
   }
 
   file_line { 'nexus-application-host':
     path  => $nexus_properties_file,
     match => '^application-host=',
-    line  => "application-host=${nexus::host}"
+    line  => "application-host=${nexus::host}",
   }
 
   file_line { 'nexus-application-port':
     path  => $nexus_properties_file,
     match => '^application-port=',
-    line  => "application-port=${nexus::port}"
+    line  => "application-port=${nexus::port}",
   }
 
   file_line { 'nexus-work':
     path  => $nexus_properties_file,
     match => '^nexus-work=',
-    line  => "nexus-work=${nexus::work_dir}"
+    line  => "nexus-work=${nexus::work_dir}",
   }
 }

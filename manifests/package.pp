@@ -62,11 +62,11 @@ class nexus::package {
       "${nexus::work_dir}/tmp",
     ]
 
-    file{ $directories:
+    file { $directories:
       ensure  => directory,
       owner   => $nexus::user,
       group   => $nexus::group,
-      require => Archive[ $dl_file ]
+      require => Archive[$dl_file],
     }
   }
 }
