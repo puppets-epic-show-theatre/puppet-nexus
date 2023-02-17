@@ -15,6 +15,6 @@ class nexus::plugin {
     owner   => 'root',
     purge   => true,
     recurse => true,
-    require => Class['nexus::package']
+    require => Class['nexus::package'],
   }
 }

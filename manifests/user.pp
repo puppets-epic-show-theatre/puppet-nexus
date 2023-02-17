@@ -6,9 +6,9 @@
 class nexus::user {
   assert_private()
 
-  if($nexus::manage_user){
+  if($nexus::manage_user) {
     group { $nexus::group :
-      ensure  => present
+      ensure  => present,
     }
 
     user { $nexus::user:
@@ -18,7 +18,7 @@ class nexus::user {
       home    => $nexus::install_root,
       shell   => '/bin/sh', # required to start application via script.
       system  => true,
-      require => Group[$nexus::group]
+      require => Group[$nexus::group],
     }
   }
 }
