@@ -1,4 +1,5 @@
-# @summary Resource to manage (local) file blobstore
+# @summary
+#  Resource to manage (local) file blobstore
 #
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent
@@ -7,7 +8,7 @@
 #   working directory as base path. The nexus (service) user needs write access to this path.
 #
 # @example
-#   nexus::blobstore::file { 'apt-hosted': }
+#   nexus::resource::blobstore::file { 'apt-hosted': }
 #
 define nexus::resource::blobstore::file (
   Enum['present', 'absent'] $ensure = 'present',

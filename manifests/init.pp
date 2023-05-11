@@ -37,7 +37,7 @@
 #   Set this option if you want to remove the default created maven and nuget repositories.
 #
 # @example
-#   class{ 'nexus':
+#   class { 'nexus':
 #     version => '3.37.3-02',
 #   }
 #

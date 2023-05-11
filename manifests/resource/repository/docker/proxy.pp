@@ -1,4 +1,5 @@
-# @summary Resource to manage docker proxy repository
+# @summary
+#  Resource to manage docker proxy repository
 #
 # @param proxy_remote_url
 #   Docker repository url like https://registry-1.docker.io.
@@ -23,8 +24,6 @@
 #   defined repository.
 # @param storage_strict_content_type_validation
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
-# @param storage_write_policy
-#   Controls if deployments of and updates to artifacts are allowed.
 # @param docker_v1_enabled
 #   Allow clients to use the V1 API to interact with this repository.
 # @param docker_force_basic_auth
@@ -45,7 +44,7 @@
 #   Regular expressions used to identify URLs that are allowed for foreign layer requests.
 #
 # @example
-#   nexus::repository::docker::proxy { 'docker-docker.io':
+#   nexus::resource::repository::docker::proxy { 'docker-docker.io':
 #      proxy_remote_url => 'https://registry-1.docker.io',
 #   }
 #
@@ -61,7 +60,6 @@ define nexus::resource::repository::docker::proxy (
   Integer $proxy_metadata_max_age = 1440,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
   Boolean $docker_v1_enabled = false,
   Boolean $docker_force_basic_auth = true,
   Optional[Stdlib::Port] $docker_http_port = undef,
@@ -81,7 +79,6 @@ define nexus::resource::repository::docker::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {

@@ -1,4 +1,5 @@
-# @summary Resource to manage npm proxy repository
+# @summary
+#  Resource to manage npm proxy repository
 #
 # @param proxy_remote_url
 #   NPM repository url like https://registry.npmjs.org.
@@ -27,11 +28,9 @@
 #   defined repository.
 # @param storage_strict_content_type_validation
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
-# @param storage_write_policy
-#   Controls if deployments of and updates to artifacts are allowed.
 #
 # @example
-#   nexus::repository::npm::proxy { 'npm-npmjs.org':
+#   nexus::resource::repository::npm::proxy { 'npm-npmjs.org':
 #      proxy_remote_url => 'https://registry.npmjs.org',
 #   }
 #
@@ -49,7 +48,6 @@ define nexus::resource::repository::npm::proxy (
   Integer $proxy_metadata_max_age = 1440,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -60,7 +58,6 @@ define nexus::resource::repository::npm::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {

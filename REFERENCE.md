@@ -35,6 +35,8 @@
 * [`nexus::resource::repository::npm::group`](#nexus--resource--repository--npm--group): Resource to manage npm group repository
 * [`nexus::resource::repository::npm::hosted`](#nexus--resource--repository--npm--hosted): Resource to manage npm hosted repository
 * [`nexus::resource::repository::npm::proxy`](#nexus--resource--repository--npm--proxy): Resource to manage npm proxy repository
+* [`nexus::resource::repository::raw::hosted`](#nexus--resource--repository--raw--hosted): Resource to manage raw hosted repository
+* [`nexus::resource::repository::rubygems::proxy`](#nexus--resource--repository--rubygems--proxy): Resource to manage RubyGems proxy repository
 * [`nexus::resource::repository::yum::hosted`](#nexus--resource--repository--yum--hosted): Resource to manage yum hosted repository
 * [`nexus::resource::repository::yum::proxy`](#nexus--resource--repository--yum--proxy): Resource to manage yum proxy repository
 
@@ -59,7 +61,7 @@ Install and configure Sonatype Nexus Repository Manager 3.
 ##### 
 
 ```puppet
-class{ 'nexus':
+class { 'nexus':
   version => '3.37.3-02',
 }
 ```
@@ -367,15 +369,15 @@ Default value: `25`
 
 ##### <a name="-nexus--config--email--username"></a>`username`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 The username to connect to the smtp server.
 
-Default value: `''`
+Default value: `undef`
 
 ##### <a name="-nexus--config--email--password"></a>`password`
 
-Data type: `Optional[String]`
+Data type: `Optional[String[1]]`
 
 The password to connect to the smtp server.
 
@@ -391,11 +393,11 @@ Default value: `'nexus@example.org'`
 
 ##### <a name="-nexus--config--email--subject_prefix"></a>`subject_prefix`
 
-Data type: `String`
+Data type: `Optional[String]`
 
 Prefix which will be added to all emails.
 
-Default value: `''`
+Default value: `undef`
 
 ##### <a name="-nexus--config--email--start_tls_enabled"></a>`start_tls_enabled`
 
@@ -489,7 +491,7 @@ Resource to manage (local) file blobstore
 ##### 
 
 ```puppet
-nexus::blobstore::file { 'apt-hosted': }
+nexus::resource::blobstore::file { 'apt-hosted': }
 ```
 
 #### Parameters
@@ -525,7 +527,7 @@ Resource to manage apt proxy repository
 ##### 
 
 ```puppet
-nexus::repository::apt::proxy { 'apt-debian':
+nexus::resource::repository::apt::proxy { 'apt-debian':
    apt_distribution => $facts['os']['distro']['codename'],
    proxy_remote_url => 'https://deb.debian.org/debian/',
 }
@@ -548,7 +550,6 @@ The following parameters are available in the `nexus::resource::repository::apt:
 * [`proxy_metadata_max_age`](#-nexus--resource--repository--apt--proxy--proxy_metadata_max_age)
 * [`storage_blob_store_name`](#-nexus--resource--repository--apt--proxy--storage_blob_store_name)
 * [`storage_strict_content_type_validation`](#-nexus--resource--repository--apt--proxy--storage_strict_content_type_validation)
-* [`storage_write_policy`](#-nexus--resource--repository--apt--proxy--storage_write_policy)
 
 ##### <a name="-nexus--resource--repository--apt--proxy--apt_distribution"></a>`apt_distribution`
 
@@ -651,14 +652,6 @@ Validate that all content uploaded to this repository is of a MIME type appropri
 
 Default value: `true`
 
-##### <a name="-nexus--resource--repository--apt--proxy--storage_write_policy"></a>`storage_write_policy`
-
-Data type: `Enum['ALLOW']`
-
-Controls if deployments of and updates to artifacts are allowed.
-
-Default value: `'ALLOW'`
-
 ### <a name="nexus--resource--repository--docker--group"></a>`nexus::resource::repository::docker::group`
 
 Resource to manage docker group repository
@@ -668,7 +661,7 @@ Resource to manage docker group repository
 ##### 
 
 ```puppet
-nexus::repository::docker::group { 'docker-group':
+nexus::resource::repository::docker::group { 'docker-group':
    group_member_names => [
       'docker-hosted',
       'docker-docker.io',
@@ -772,8 +765,7 @@ Resource to manage docker hosted repository
 ##### 
 
 ```puppet
-nexus::repository::docker::hosted { 'docker-hosted':
-}
+nexus::resource::repository::docker::hosted { 'docker-hosted': }
 ```
 
 #### Parameters
@@ -881,7 +873,7 @@ Resource to manage docker proxy repository
 ##### 
 
 ```puppet
-nexus::repository::docker::proxy { 'docker-docker.io':
+nexus::resource::repository::docker::proxy { 'docker-docker.io':
    proxy_remote_url => 'https://registry-1.docker.io',
 }
 ```
@@ -901,7 +893,6 @@ The following parameters are available in the `nexus::resource::repository::dock
 * [`proxy_metadata_max_age`](#-nexus--resource--repository--docker--proxy--proxy_metadata_max_age)
 * [`storage_blob_store_name`](#-nexus--resource--repository--docker--proxy--storage_blob_store_name)
 * [`storage_strict_content_type_validation`](#-nexus--resource--repository--docker--proxy--storage_strict_content_type_validation)
-* [`storage_write_policy`](#-nexus--resource--repository--docker--proxy--storage_write_policy)
 * [`docker_v1_enabled`](#-nexus--resource--repository--docker--proxy--docker_v1_enabled)
 * [`docker_force_basic_auth`](#-nexus--resource--repository--docker--proxy--docker_force_basic_auth)
 * [`docker_http_port`](#-nexus--resource--repository--docker--proxy--docker_http_port)
@@ -999,14 +990,6 @@ Validate that all content uploaded to this repository is of a MIME type appropri
 
 Default value: `true`
 
-##### <a name="-nexus--resource--repository--docker--proxy--storage_write_policy"></a>`storage_write_policy`
-
-Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
-
-Controls if deployments of and updates to artifacts are allowed.
-
-Default value: `'ALLOW'`
-
 ##### <a name="-nexus--resource--repository--docker--proxy--docker_v1_enabled"></a>`docker_v1_enabled`
 
 Data type: `Boolean`
@@ -1088,7 +1071,7 @@ Resource to manage npm group repository
 ##### 
 
 ```puppet
-nexus::repository::npm::group { 'npm-group':
+nexus::resource::repository::npm::group { 'npm-group':
    group_member_names => [
       'npm-hosted',
       'npm-npmjs.org',
@@ -1156,7 +1139,7 @@ Resource to manage npm hosted repository
 ##### 
 
 ```puppet
-nexus::repository::npm::hosted { 'npm-hosted': }
+nexus::resource::repository::npm::hosted { 'npm-hosted': }
 ```
 
 #### Parameters
@@ -1205,7 +1188,7 @@ Default value: `true`
 
 ##### <a name="-nexus--resource--repository--npm--hosted--storage_write_policy"></a>`storage_write_policy`
 
-Data type: `Enum['allow_once']`
+Data type: `Enum['allow', 'allow_once', 'deny']`
 
 Controls if deployments of and updates to artifacts are allowed.
 
@@ -1228,7 +1211,7 @@ Resource to manage npm proxy repository
 ##### 
 
 ```puppet
-nexus::repository::npm::proxy { 'npm-npmjs.org':
+nexus::resource::repository::npm::proxy { 'npm-npmjs.org':
    proxy_remote_url => 'https://registry.npmjs.org',
 }
 ```
@@ -1250,7 +1233,6 @@ The following parameters are available in the `nexus::resource::repository::npm:
 * [`proxy_metadata_max_age`](#-nexus--resource--repository--npm--proxy--proxy_metadata_max_age)
 * [`storage_blob_store_name`](#-nexus--resource--repository--npm--proxy--storage_blob_store_name)
 * [`storage_strict_content_type_validation`](#-nexus--resource--repository--npm--proxy--storage_strict_content_type_validation)
-* [`storage_write_policy`](#-nexus--resource--repository--npm--proxy--storage_write_policy)
 
 ##### <a name="-nexus--resource--repository--npm--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
@@ -1355,7 +1337,206 @@ Validate that all content uploaded to this repository is of a MIME type appropri
 
 Default value: `true`
 
-##### <a name="-nexus--resource--repository--npm--proxy--storage_write_policy"></a>`storage_write_policy`
+### <a name="nexus--resource--repository--raw--hosted"></a>`nexus::resource::repository::raw::hosted`
+
+Resource to manage raw hosted repository
+
+#### Examples
+
+##### 
+
+```puppet
+nexus::resource::repository::raw::hosted { 'raw-hosted': }
+```
+
+#### Parameters
+
+The following parameters are available in the `nexus::resource::repository::raw::hosted` defined type:
+
+* [`ensure`](#-nexus--resource--repository--raw--hosted--ensure)
+* [`online`](#-nexus--resource--repository--raw--hosted--online)
+* [`storage_blob_store_name`](#-nexus--resource--repository--raw--hosted--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--raw--hosted--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--raw--hosted--storage_write_policy)
+* [`component_proprietary_components`](#-nexus--resource--repository--raw--hosted--component_proprietary_components)
+* [`content_disposition`](#-nexus--resource--repository--raw--hosted--content_disposition)
+
+##### <a name="-nexus--resource--repository--raw--hosted--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Define if the resource should be created/present or deleted/absent.
+
+Default value: `'present'`
+
+##### <a name="-nexus--resource--repository--raw--hosted--online"></a>`online`
+
+Data type: `Boolean`
+
+Whether this repository accepts incoming requests.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--raw--hosted--storage_blob_store_name"></a>`storage_blob_store_name`
+
+Data type: `String[1]`
+
+The name of the blobstore inside of nexus repository manager to be used. We suggest to use a own blobstore for each
+defined repository.
+
+Default value: `$title`
+
+##### <a name="-nexus--resource--repository--raw--hosted--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+
+Data type: `Boolean`
+
+Whether to validate uploaded content's MIME type appropriate for the repository format.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--raw--hosted--storage_write_policy"></a>`storage_write_policy`
+
+Data type: `Enum['allow', 'allow_once', 'deny']`
+
+Controls if deployments of and updates to assets are allowed.
+
+Default value: `'allow_once'`
+
+##### <a name="-nexus--resource--repository--raw--hosted--component_proprietary_components"></a>`component_proprietary_components`
+
+Data type: `Boolean`
+
+Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--raw--hosted--content_disposition"></a>`content_disposition`
+
+Data type: `Enum['INLINE', 'ATTACHMENT']`
+
+Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
+
+Default value: `'ATTACHMENT'`
+
+### <a name="nexus--resource--repository--rubygems--proxy"></a>`nexus::resource::repository::rubygems::proxy`
+
+Resource to manage RubyGems proxy repository
+
+#### Examples
+
+##### 
+
+```puppet
+nexus::resource::repository::rubygems::proxy { 'rubygems.org':
+   proxy_remote_url => 'https://rubygems.org/',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `nexus::resource::repository::rubygems::proxy` defined type:
+
+* [`proxy_remote_url`](#-nexus--resource--repository--rubygems--proxy--proxy_remote_url)
+* [`ensure`](#-nexus--resource--repository--rubygems--proxy--ensure)
+* [`http_client_auto_block`](#-nexus--resource--repository--rubygems--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--rubygems--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--rubygems--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--rubygems--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--rubygems--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--rubygems--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--rubygems--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--rubygems--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--rubygems--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--rubygems--proxy--storage_write_policy)
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--proxy_remote_url"></a>`proxy_remote_url`
+
+Data type: `Stdlib::HTTPSUrl`
+
+RubyGems repository url like https://rubygems.org/.
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Define if the resource should be created/present or deleted/absent.
+
+Default value: `'present'`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--http_client_auto_block"></a>`http_client_auto_block`
+
+Data type: `Boolean`
+
+Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--http_client_blocked"></a>`http_client_blocked`
+
+Data type: `Boolean`
+
+Block outbound connections on the repository.
+
+Default value: `false`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
+
+Data type: `Boolean`
+
+Cache responses for content not present in the proxied repository.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+
+Data type: `Integer`
+
+How long to cache the fact that a file was not found in the repository (in minutes).
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--online"></a>`online`
+
+Data type: `Boolean`
+
+Enable this repository in nexus repository manager that it can be used.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
+
+Data type: `Integer`
+
+Max age of content (packages).
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+
+Data type: `Integer`
+
+Max age of the repository metadata.
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
+
+Data type: `String[1]`
+
+The name of the blobstore inside of nexus repository manager to be used. We suggest to use a own blobstore for each
+defined repository.
+
+Default value: `$title`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+
+Data type: `Boolean`
+
+Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--rubygems--proxy--storage_write_policy"></a>`storage_write_policy`
 
 Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
 
@@ -1441,7 +1622,7 @@ Default value: `true`
 
 ##### <a name="-nexus--resource--repository--yum--hosted--repodata_depth"></a>`repodata_depth`
 
-Data type: `Integer`
+Data type: `Integer[0, 5]`
 
 Set the depth of the directory in which the repodata/repomd.xml will be generated.
 
@@ -1484,7 +1665,6 @@ The following parameters are available in the `nexus::resource::repository::yum:
 * [`proxy_metadata_max_age`](#-nexus--resource--repository--yum--proxy--proxy_metadata_max_age)
 * [`storage_blob_store_name`](#-nexus--resource--repository--yum--proxy--storage_blob_store_name)
 * [`storage_strict_content_type_validation`](#-nexus--resource--repository--yum--proxy--storage_strict_content_type_validation)
-* [`storage_write_policy`](#-nexus--resource--repository--yum--proxy--storage_write_policy)
 
 ##### <a name="-nexus--resource--repository--yum--proxy--proxy_remote_url"></a>`proxy_remote_url`
 
@@ -1572,14 +1752,6 @@ Data type: `Boolean`
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
 Default value: `true`
-
-##### <a name="-nexus--resource--repository--yum--proxy--storage_write_policy"></a>`storage_write_policy`
-
-Data type: `Enum['ALLOW']`
-
-Controls if deployments of and updates to artifacts are allowed.
-
-Default value: `'ALLOW'`
 
 ## Resource types
 

@@ -1,4 +1,5 @@
-# @summary Base class used by plugin classes
+# @summary
+#  Base class used by plugin classes
 #
 # @api private
 #

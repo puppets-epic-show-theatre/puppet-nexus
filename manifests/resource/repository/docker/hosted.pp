@@ -1,4 +1,5 @@
-# @summary Resource to manage docker hosted repository
+# @summary
+#  Resource to manage docker hosted repository
 #
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
@@ -23,8 +24,7 @@
 #   Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 #
 # @example
-#   nexus::repository::docker::hosted { 'docker-hosted':
-#   }
+#   nexus::resource::repository::docker::hosted { 'docker-hosted': }
 #
 define nexus::resource::repository::docker::hosted (
   Enum['present', 'absent'] $ensure = 'present',

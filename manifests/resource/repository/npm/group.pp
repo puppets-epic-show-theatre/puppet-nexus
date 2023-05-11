@@ -1,4 +1,5 @@
-# @summary Resource to manage npm group repository
+# @summary
+#  Resource to manage npm group repository
 #
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
@@ -13,7 +14,7 @@
 #   Ordered array of the (npm) member to be grouped into this repository.
 #
 # @example
-#   nexus::repository::npm::group { 'npm-group':
+#   nexus::resource::repository::npm::group { 'npm-group':
 #      group_member_names => [
 #         'npm-hosted',
 #         'npm-npmjs.org',

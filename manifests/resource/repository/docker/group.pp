@@ -1,4 +1,5 @@
-# @summary Resource to manage docker group repository
+# @summary
+#  Resource to manage docker group repository
 #
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
@@ -21,7 +22,7 @@
 #   Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 #
 # @example
-#   nexus::repository::docker::group { 'docker-group':
+#   nexus::resource::repository::docker::group { 'docker-group':
 #      group_member_names => [
 #         'docker-hosted',
 #         'docker-docker.io',

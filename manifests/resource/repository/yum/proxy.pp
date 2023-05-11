@@ -1,4 +1,5 @@
-# @summary Resource to manage yum proxy repository
+# @summary
+#  Resource to manage yum proxy repository
 #
 # @param proxy_remote_url
 #   yum repository url like https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/.
@@ -23,8 +24,6 @@
 #   defined repository.
 # @param storage_strict_content_type_validation
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
-# @param storage_write_policy
-#   Controls if deployments of and updates to artifacts are allowed.
 #
 # @example
 #   nexus::resource::repository::yum::proxy { 'yum-oracle-latest':
@@ -43,7 +42,6 @@ define nexus::resource::repository::yum::proxy (
   Integer $proxy_metadata_max_age = 1440,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['ALLOW'] $storage_write_policy = 'ALLOW',
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -54,7 +52,6 @@ define nexus::resource::repository::yum::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {
