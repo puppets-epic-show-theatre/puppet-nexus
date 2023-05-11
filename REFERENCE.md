@@ -1414,7 +1414,7 @@ Default value: `true`
 
 Data type: `Enum['INLINE', 'ATTACHMENT']`
 
-Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
+Content Disposition
 
 Default value: `'ATTACHMENT'`
 

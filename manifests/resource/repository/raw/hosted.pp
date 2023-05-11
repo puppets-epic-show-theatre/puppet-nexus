@@ -15,7 +15,7 @@
 # @param component_proprietary_components
 #   Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
 # @param content_disposition
-#   Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
+#   Content Disposition
 #
 # @example
 #   nexus::resource::repository::raw::hosted { 'raw-hosted': }
