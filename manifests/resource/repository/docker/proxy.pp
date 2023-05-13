@@ -9,6 +9,12 @@
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
 #   Block outbound connections on the repository.
+# @param http_client_authentication_type
+#   Authentication type
+# @param http_client_authentication_username
+# @param http_client_authentication_password
+# @param http_client_authentication_ntlm_host
+# @param http_client_authentication_ntlm_domain
 # @param negative_cache_enabled
 #   Cache responses for content not present in the proxied repository.
 # @param negative_cache_time_to_live
@@ -53,6 +59,11 @@ define nexus::resource::repository::docker::proxy (
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
+  Optional[Enum['username', 'ntlm ']] $http_client_authentication_type = undef,
+  Optional[String[1]] $http_client_authentication_username = undef,
+  Optional[String[1]] $http_client_authentication_password = undef,
+  Optional[String[1]] $http_client_authentication_ntlm_host = undef,
+  Optional[String[1]] $http_client_authentication_ntlm_domain = undef,
   Boolean $negative_cache_enabled = true,
   Integer $negative_cache_time_to_live = 1440,
   Boolean $online = true,
@@ -101,7 +112,13 @@ define nexus::resource::repository::docker::proxy (
           'enableCookies'           => false,
           'useTrustStore'           => false,
         },
-        'authentication' => undef,
+        'authentication' => {
+          'type'       => $http_client_authentication_type,
+          'username'   => $http_client_authentication_username,
+          'password'   => $http_client_authentication_password,
+          'ntlmHost'   => $http_client_authentication_ntlm_host,
+          'ntlmDomain' => $http_client_authentication_ntlm_domain,
+        },
       },
       'routingRuleName' => undef,
       'docker'          => {

@@ -886,6 +886,11 @@ The following parameters are available in the `nexus::resource::repository::dock
 * [`ensure`](#-nexus--resource--repository--docker--proxy--ensure)
 * [`http_client_auto_block`](#-nexus--resource--repository--docker--proxy--http_client_auto_block)
 * [`http_client_blocked`](#-nexus--resource--repository--docker--proxy--http_client_blocked)
+* [`http_client_authentication_type`](#-nexus--resource--repository--docker--proxy--http_client_authentication_type)
+* [`http_client_authentication_username`](#-nexus--resource--repository--docker--proxy--http_client_authentication_username)
+* [`http_client_authentication_password`](#-nexus--resource--repository--docker--proxy--http_client_authentication_password)
+* [`http_client_authentication_ntlm_host`](#-nexus--resource--repository--docker--proxy--http_client_authentication_ntlm_host)
+* [`http_client_authentication_ntlm_domain`](#-nexus--resource--repository--docker--proxy--http_client_authentication_ntlm_domain)
 * [`negative_cache_enabled`](#-nexus--resource--repository--docker--proxy--negative_cache_enabled)
 * [`negative_cache_time_to_live`](#-nexus--resource--repository--docker--proxy--negative_cache_time_to_live)
 * [`online`](#-nexus--resource--repository--docker--proxy--online)
@@ -932,6 +937,46 @@ Data type: `Boolean`
 Block outbound connections on the repository.
 
 Default value: `false`
+
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_authentication_type"></a>`http_client_authentication_type`
+
+Data type: `Optional[Enum['username', 'ntlm ']]`
+
+Authentication type
+
+Default value: `undef`
+
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_authentication_username"></a>`http_client_authentication_username`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
+
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_authentication_password"></a>`http_client_authentication_password`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
+
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_authentication_ntlm_host"></a>`http_client_authentication_ntlm_host`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
+
+##### <a name="-nexus--resource--repository--docker--proxy--http_client_authentication_ntlm_domain"></a>`http_client_authentication_ntlm_domain`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
 
 ##### <a name="-nexus--resource--repository--docker--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
 
