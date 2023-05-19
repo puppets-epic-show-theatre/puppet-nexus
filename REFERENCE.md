@@ -35,6 +35,7 @@
 * [`nexus::resource::repository::npm::group`](#nexus--resource--repository--npm--group): Resource to manage npm group repository
 * [`nexus::resource::repository::npm::hosted`](#nexus--resource--repository--npm--hosted): Resource to manage npm hosted repository
 * [`nexus::resource::repository::npm::proxy`](#nexus--resource--repository--npm--proxy): Resource to manage npm proxy repository
+* [`nexus::resource::repository::pypi::proxy`](#nexus--resource--repository--pypi--proxy): Resource to manage PyPi proxy repository
 * [`nexus::resource::repository::raw::hosted`](#nexus--resource--repository--raw--hosted): Resource to manage raw hosted repository
 * [`nexus::resource::repository::rubygems::proxy`](#nexus--resource--repository--rubygems--proxy): Resource to manage RubyGems proxy repository
 * [`nexus::resource::repository::yum::hosted`](#nexus--resource--repository--yum--hosted): Resource to manage yum hosted repository
@@ -1381,6 +1382,132 @@ Data type: `Boolean`
 Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 
 Default value: `true`
+
+### <a name="nexus--resource--repository--pypi--proxy"></a>`nexus::resource::repository::pypi::proxy`
+
+Resource to manage PyPi proxy repository
+
+#### Examples
+
+##### 
+
+```puppet
+nexus::resource::repository::pypi::proxy { 'pypi.org':
+   proxy_remote_url => 'https://pypi.org',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `nexus::resource::repository::pypi::proxy` defined type:
+
+* [`proxy_remote_url`](#-nexus--resource--repository--pypi--proxy--proxy_remote_url)
+* [`ensure`](#-nexus--resource--repository--pypi--proxy--ensure)
+* [`http_client_auto_block`](#-nexus--resource--repository--pypi--proxy--http_client_auto_block)
+* [`http_client_blocked`](#-nexus--resource--repository--pypi--proxy--http_client_blocked)
+* [`negative_cache_enabled`](#-nexus--resource--repository--pypi--proxy--negative_cache_enabled)
+* [`negative_cache_time_to_live`](#-nexus--resource--repository--pypi--proxy--negative_cache_time_to_live)
+* [`online`](#-nexus--resource--repository--pypi--proxy--online)
+* [`proxy_content_max_age`](#-nexus--resource--repository--pypi--proxy--proxy_content_max_age)
+* [`proxy_metadata_max_age`](#-nexus--resource--repository--pypi--proxy--proxy_metadata_max_age)
+* [`storage_blob_store_name`](#-nexus--resource--repository--pypi--proxy--storage_blob_store_name)
+* [`storage_strict_content_type_validation`](#-nexus--resource--repository--pypi--proxy--storage_strict_content_type_validation)
+* [`storage_write_policy`](#-nexus--resource--repository--pypi--proxy--storage_write_policy)
+
+##### <a name="-nexus--resource--repository--pypi--proxy--proxy_remote_url"></a>`proxy_remote_url`
+
+Data type: `Stdlib::HTTPSUrl`
+
+PyPi repository url like https://pypi.org.
+
+##### <a name="-nexus--resource--repository--pypi--proxy--ensure"></a>`ensure`
+
+Data type: `Enum['present', 'absent']`
+
+Define if the resource should be created/present or deleted/absent.
+
+Default value: `'present'`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--http_client_auto_block"></a>`http_client_auto_block`
+
+Data type: `Boolean`
+
+Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--http_client_blocked"></a>`http_client_blocked`
+
+Data type: `Boolean`
+
+Block outbound connections on the repository.
+
+Default value: `false`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--negative_cache_enabled"></a>`negative_cache_enabled`
+
+Data type: `Boolean`
+
+Cache responses for content not present in the proxied repository.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--negative_cache_time_to_live"></a>`negative_cache_time_to_live`
+
+Data type: `Integer`
+
+How long to cache the fact that a file was not found in the repository (in minutes).
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--online"></a>`online`
+
+Data type: `Boolean`
+
+Enable this repository in nexus repository manager that it can be used.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--proxy_content_max_age"></a>`proxy_content_max_age`
+
+Data type: `Integer`
+
+Max age of content (packages).
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--proxy_metadata_max_age"></a>`proxy_metadata_max_age`
+
+Data type: `Integer`
+
+Max age of the repository metadata.
+
+Default value: `1440`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--storage_blob_store_name"></a>`storage_blob_store_name`
+
+Data type: `String[1]`
+
+The name of the blobstore inside of nexus repository manager to be used. We suggest to use a own blobstore for each
+defined repository.
+
+Default value: `$title`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--storage_strict_content_type_validation"></a>`storage_strict_content_type_validation`
+
+Data type: `Boolean`
+
+Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
+
+Default value: `true`
+
+##### <a name="-nexus--resource--repository--pypi--proxy--storage_write_policy"></a>`storage_write_policy`
+
+Data type: `Enum['ALLOW','ALLOW_ONCE','DENY']`
+
+Controls if deployments of and updates to artifacts are allowed.
+
+Default value: `'ALLOW'`
 
 ### <a name="nexus--resource--repository--raw--hosted"></a>`nexus::resource::repository::raw::hosted`
 
