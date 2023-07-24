@@ -14,3 +14,8 @@ jobs:
         uses: puppets-epic-show-theatre/action-pdk-validate@v1
         with:
           puppet-version: "7"
+
+      - name: Run static validation on puppet 8
+        uses: puppets-epic-show-theatre/action-pdk-validate@v1
+        with:
+          puppet-version: "8"
