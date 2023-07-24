@@ -8,6 +8,12 @@
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
 #   Block outbound connections on the repository.
+# @param http_client_authentication_type
+#   Authentication type
+# @param http_client_authentication_username
+# @param http_client_authentication_password
+# @param http_client_authentication_ntlm_host
+# @param http_client_authentication_ntlm_domain
 # @param negative_cache_enabled
 #   Cache responses for content not present in the proxied repository.
 # @param negative_cache_time_to_live
@@ -23,8 +29,6 @@
 #   defined repository.
 # @param storage_strict_content_type_validation
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
-# @param storage_write_policy
-#   Controls if deployments of and updates to artifacts are allowed.
 # @param docker_v1_enabled
 #   Allow clients to use the V1 API to interact with this repository.
 # @param docker_force_basic_auth
@@ -45,7 +49,7 @@
 #   Regular expressions used to identify URLs that are allowed for foreign layer requests.
 #
 # @example
-#   nexus::repository::docker::proxy { 'docker-docker.io':
+#   nexus::resource::repository::docker::proxy { 'docker-docker.io':
 #      proxy_remote_url => 'https://registry-1.docker.io',
 #   }
 #
@@ -54,6 +58,11 @@ define nexus::resource::repository::docker::proxy (
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
+  Optional[Enum['username', 'ntlm ']] $http_client_authentication_type = undef,
+  Optional[String[1]] $http_client_authentication_username = undef,
+  Optional[String[1]] $http_client_authentication_password = undef,
+  Optional[String[1]] $http_client_authentication_ntlm_host = undef,
+  Optional[String[1]] $http_client_authentication_ntlm_domain = undef,
   Boolean $negative_cache_enabled = true,
   Integer $negative_cache_time_to_live = 1440,
   Boolean $online = true,
@@ -61,7 +70,6 @@ define nexus::resource::repository::docker::proxy (
   Integer $proxy_metadata_max_age = 1440,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
   Boolean $docker_v1_enabled = false,
   Boolean $docker_force_basic_auth = true,
   Optional[Stdlib::Port] $docker_http_port = undef,
@@ -81,7 +89,6 @@ define nexus::resource::repository::docker::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {
@@ -104,7 +111,13 @@ define nexus::resource::repository::docker::proxy (
           'enableCookies'           => false,
           'useTrustStore'           => false,
         },
-        'authentication' => undef,
+        'authentication' => {
+          'type'       => $http_client_authentication_type,
+          'username'   => $http_client_authentication_username,
+          'password'   => $http_client_authentication_password,
+          'ntlmHost'   => $http_client_authentication_ntlm_host,
+          'ntlmDomain' => $http_client_authentication_ntlm_domain,
+        },
       },
       'routingRuleName' => undef,
       'docker'          => {
