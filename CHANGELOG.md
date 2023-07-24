@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0]
+### Added
+- Extended test suite to puppet 8
+
+### Changed
+- PDK version to 3.0.0
+- Codestyle adjustmensts
+
+### Removed
+- Support for end of life puppet 6
+
 ## [3.5.0]
 ### Added
 - `docker_subdomain` in `nexus::resource::repository::docker::proxy`
