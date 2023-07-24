@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - PDK version to 3.0.0
+- Codestyle adjustmensts
 
 ### Removed
 - Support for end of life puppet 6
