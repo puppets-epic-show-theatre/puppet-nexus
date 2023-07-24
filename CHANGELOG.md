@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.0.0]
 ### Added
 - Extended test suite to puppet 8
+- Add docker subdomain connector parameter
 
 ### Changed
 - PDK version to 3.0.0

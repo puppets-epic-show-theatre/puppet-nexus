@@ -21,6 +21,8 @@
 #   Create an HTTP connector at specified port. Normally used if the server is behind a secure proxy.
 # @param docker_https_port
 #   Create an HTTPS connector at specified port. Normally used if the server is configured for https.
+# @param docker_subdomain
+#   Use the following subdomain to make push and pull requests for this repository.
 #
 # @example
 #   nexus::repository::docker::hosted { 'docker-hosted':
@@ -37,6 +39,7 @@ define nexus::resource::repository::docker::hosted (
   Boolean $docker_force_basic_auth = true,
   Optional[Stdlib::Port] $docker_http_port = undef,
   Optional[Stdlib::Port] $docker_https_port = undef,
+  Optional[Stdlib::Fqdn] $docker_subdomain = undef,
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -58,6 +61,7 @@ define nexus::resource::repository::docker::hosted (
         'forceBasicAuth' => $docker_force_basic_auth,
         'httpPort'       => $docker_http_port,
         'httpsPort'      => $docker_https_port,
+        'subdomain'      => $docker_subdomain,
       },
     },
   }
