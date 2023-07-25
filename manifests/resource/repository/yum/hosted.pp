@@ -30,7 +30,7 @@ define nexus::resource::repository::yum::hosted (
   Boolean $storage_strict_content_type_validation = true,
   Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW_ONCE',
   Boolean $component_proprietary_components = true,
-  Integer $repodata_depth = 0,
+  Integer[0, 5] $repodata_depth = 0,
   Enum['STRICT','PERMISSIVE'] $deploy_policy = 'STRICT',
 ) {
   nexus_repository { $title:
