@@ -15,14 +15,14 @@
 #   Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
 #
 # @example
-#   nexus::repository::npm::hosted { 'npm-hosted': }
+#   nexus::resource::repository::npm::hosted { 'npm-hosted': }
 #
 define nexus::resource::repository::npm::hosted (
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $online = true,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['allow_once'] $storage_write_policy = 'allow_once',
+  Enum['allow', 'allow_once', 'deny'] $storage_write_policy = 'allow_once',
   Boolean $component_proprietary_components = true,
 ) {
   nexus_repository { $title:
