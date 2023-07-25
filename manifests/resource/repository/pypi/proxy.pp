@@ -51,22 +51,22 @@ define nexus::resource::repository::pypi::proxy (
     format     => 'pypi',
     type       => 'proxy',
     attributes => {
-      'online'        => $online,
-      'storage'       => {
+      'online'          => $online,
+      'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
       },
-      'cleanup'       => undef,
-      'proxy'         => {
+      'cleanup'         => undef,
+      'proxy'           => {
         'remoteUrl'      => $proxy_remote_url,
         'contentMaxAge'  => $proxy_content_max_age,
         'metadataMaxAge' => $proxy_metadata_max_age,
       },
-      'negativeCache' => {
+      'negativeCache'   => {
         'enabled'    => $negative_cache_enabled,
         'timeToLive' => $negative_cache_time_to_live,
       },
-      'httpClient'    => {
+      'httpClient'      => {
         'blocked'        => $http_client_blocked,
         'autoBlock'      => $http_client_auto_block,
         'connection'     => {
@@ -79,7 +79,7 @@ define nexus::resource::repository::pypi::proxy (
         },
         'authentication' => undef,
       },
-      'routingRule'   => undef,
+      'routingRuleName' => undef,
     },
   }
 }
