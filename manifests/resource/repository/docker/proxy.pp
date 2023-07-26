@@ -101,9 +101,9 @@ define nexus::resource::repository::docker::proxy (
         'timeToLive' => $negative_cache_time_to_live,
       },
       'httpClient'      => {
-        'blocked'        => $http_client_blocked,
-        'autoBlock'      => $http_client_auto_block,
-        'connection'     => {
+        'blocked'    => $http_client_blocked,
+        'autoBlock'  => $http_client_auto_block,
+        'connection' => {
           'retries'                 => undef,
           'userAgentSuffix'         => undef,
           'timeout'                 => undef,
@@ -111,13 +111,13 @@ define nexus::resource::repository::docker::proxy (
           'enableCookies'           => false,
           'useTrustStore'           => false,
         },
-        'authentication' => {
-          'type'       => $http_client_authentication_type,
-          'username'   => $http_client_authentication_username,
-          'password'   => $http_client_authentication_password,
-          'ntlmHost'   => $http_client_authentication_ntlm_host,
-          'ntlmDomain' => $http_client_authentication_ntlm_domain,
-        },
+        # 'authentication' => {
+        #   'type'       => $http_client_authentication_type,
+        #   'username'   => $http_client_authentication_username,
+        #   'password'   => $http_client_authentication_password,
+        #   'ntlmHost'   => $http_client_authentication_ntlm_host,
+        #   'ntlmDomain' => $http_client_authentication_ntlm_domain,
+        # },
       },
       'routingRuleName' => undef,
       'docker'          => {
