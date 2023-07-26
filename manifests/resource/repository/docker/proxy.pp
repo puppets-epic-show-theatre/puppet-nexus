@@ -9,12 +9,6 @@
 # @param http_client_blocked
 #   Block outbound connections on the repository.
 # @param authentication
-# @param http_client_authentication_type
-#   Authentication type
-# @param http_client_authentication_username
-# @param http_client_authentication_password
-# @param http_client_authentication_ntlm_host
-# @param http_client_authentication_ntlm_domain
 # @param negative_cache_enabled
 #   Cache responses for content not present in the proxied repository.
 # @param negative_cache_time_to_live
