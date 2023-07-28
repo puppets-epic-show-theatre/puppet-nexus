@@ -56,7 +56,7 @@ define nexus::resource::repository::docker::proxy (
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
   Optional[Struct[{
-        type => Enum['username', 'ntlm '],
+        type => Enum['username', 'ntlm'],
         username => String[1],
         password => String[1],
         Optional[ntlmHost] => Optional[String[1]],
