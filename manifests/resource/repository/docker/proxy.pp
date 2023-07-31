@@ -8,6 +8,7 @@
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
 #   Block outbound connections on the repository.
+# @param authentication
 # @param negative_cache_enabled
 #   Cache responses for content not present in the proxied repository.
 # @param negative_cache_time_to_live
@@ -45,7 +46,7 @@
 #   Regular expressions used to identify URLs that are allowed for foreign layer requests.
 #
 # @example
-#   nexus::repository::docker::proxy { 'docker-docker.io':
+#   nexus::resource::repository::docker::proxy { 'docker-docker.io':
 #      proxy_remote_url => 'https://registry-1.docker.io',
 #   }
 #
@@ -54,6 +55,13 @@ define nexus::resource::repository::docker::proxy (
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
+  Optional[Struct[{
+        type => Enum['username', 'ntlm'],
+        username => String[1],
+        password => String[1],
+        Optional[ntlmHost] => Optional[String[1]],
+        Optional[ntlmDomain] => Optional[String[1]],
+  }]] $authentication = undef,
   Boolean $negative_cache_enabled = true,
   Integer $negative_cache_time_to_live = 1440,
   Boolean $online = true,
@@ -104,7 +112,7 @@ define nexus::resource::repository::docker::proxy (
           'enableCookies'           => false,
           'useTrustStore'           => false,
         },
-        'authentication' => undef,
+        'authentication' => $authentication,
       },
       'routingRuleName' => undef,
       'docker'          => {
