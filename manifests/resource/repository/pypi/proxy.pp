@@ -26,6 +26,8 @@
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 # @param storage_write_policy
 #   Controls if deployments of and updates to artifacts are allowed.
+# @param remove_quarantined
+#   Remove Quarantined Versions.
 #
 # @example
 #   nexus::resource::repository::pypi::proxy { 'pypi.org':
@@ -45,6 +47,7 @@ define nexus::resource::repository::pypi::proxy (
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
   Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
+  Boolean $remove_quarantined = false,
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -55,6 +58,7 @@ define nexus::resource::repository::pypi::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
+        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {
@@ -80,6 +84,9 @@ define nexus::resource::repository::pypi::proxy (
         'authentication' => undef,
       },
       'routingRuleName' => undef,
+      'pypi'            => {
+        'removeQuarantined' => $remove_quarantined,
+      },
     },
   }
 }
