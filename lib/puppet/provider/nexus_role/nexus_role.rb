@@ -17,9 +17,9 @@ class Puppet::Provider::NexusRole::NexusRole < Puppet::ResourceApi::SimpleProvid
   def keys_to_snake_case(hash)
     hash.transform_keys do |key|
       key.gsub(%r{([A-Z]+)([A-Z][a-z])}, '\1_\2')
-          .gsub(%r{([a-z\d])([A-Z])}, '\1_\2')
-          .downcase
-          .to_sym
+         .gsub(%r{([a-z\d])([A-Z])}, '\1_\2')
+         .downcase
+         .to_sym
     end
   end
 
@@ -27,9 +27,9 @@ class Puppet::Provider::NexusRole::NexusRole < Puppet::ResourceApi::SimpleProvid
   def keys_to_camelcase(hash)
     hash.transform_keys do |key|
       key.to_s
-          .gsub(%r{(?:_+)([a-z])}) { Regexp.last_match(1).upcase }
-          .gsub(%r{(\A|\s)([A-Z])}) { Regexp.last_match(1) + Regexp.last_match(2).downcase }
-          .to_sym
+         .gsub(%r{(?:_+)([a-z])}) { Regexp.last_match(1).upcase }
+         .gsub(%r{(\A|\s)([A-Z])}) { Regexp.last_match(1) + Regexp.last_match(2).downcase }
+         .to_sym
     end
   end
 
@@ -37,9 +37,9 @@ class Puppet::Provider::NexusRole::NexusRole < Puppet::ResourceApi::SimpleProvid
   def get(context)
     res = context.transport.get_request(context, 'security/roles')
     context.err(res.body) unless res.success?
-    Puppet::Util::Json.load(res.body).map { |role|
-      keys_to_snake_case(role.merge({'ensure' => 'present'}))
-    }
+    Puppet::Util::Json.load(res.body).map do |role|
+      keys_to_snake_case(role.merge({ 'ensure' => 'present' }))
+    end
   end
 
   # Creates new role if they not exist yet
