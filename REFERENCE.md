@@ -44,6 +44,7 @@
 * [`nexus_repository`](#nexus_repository): Raw provider to configure repository over the nexus repository manager rest api.  Please use the defined types instead of this one directly.
 * [`nexus_setting`](#nexus_setting): Raw provider to set settings over the nexus repository manager rest api.  Please use nexus::config::* classes instead of this one directly.
 * [`nexus_user`](#nexus_user): Manage nexus repository users
+* [`nexus_role`](#nexus_role): Manage nexus repository roles
 
 ## Classes
 
@@ -1815,4 +1816,100 @@ namevar
 Data type: `String`
 
 The login name of the user.
+
+### <a name="nexus_role"></a>`nexus_role`
+
+```puppet
+nexus_role { 'rolename':
+        ensure      => 'present',
+        id          => 'reader',
+        description => 'read acdess to raw repository',
+        privileges  => ['nx-repository-view-raw-*-read'],
+        roles       => '',
+}
+```
+
+#### Properties
+
+The following properties are available in the `nexus_role` type.
+
+##### `ensure`
+
+Data type: `Enum[present, absent]`
+
+Whether this resource should be present or absent on the target system.
+
+Default value: `present`
+
+##### `id`
+
+Data type: `String`
+
+The id of the role.
+
+##### `source`
+
+Data type: `Optional[String]`
+
+The source of the role.
+
+##### `name`
+
+Data type: `Optional[String]`
+
+The name of the role which will be the same like id.
+
+##### `description`
+
+Data type: `Optional[String]`
+
+The description of the role.
+
+##### `read_only`
+
+Data type: `Optional[Boolean]`
+
+Flag if this is a read only role.
+
+##### `privileges`
+
+Data type: `Optional[Array[String]]`
+
+The privileges the role should have.
+
+##### `roles`
+
+Data type: `Optional[Array[String]]`
+
+Other roles the new role should have.
+
+##### `read_only`
+
+Data type: `Boolean`
+
+The status of the user if it is read only.
+
+##### `roles`
+
+Data type: `Array[String]`
+
+The roles assigned to the user.
+
+Default value: `["nx-anonymous"]`
+
+##### `source`
+
+Data type: `String`
+
+The datasource of the user. e.g. local or ldap source name.
+
+Default value: `default`
+
+##### `status`
+
+Data type: `Enum[active,disabled,changepassword]`
+
+The user status.
+
+Default value: `active`
 
