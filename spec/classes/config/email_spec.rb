@@ -10,7 +10,7 @@ describe 'nexus::config::email' do
       'enabled' => false,
       'host' => 'localhost',
       'port' => 25,
-      'username' => nil,
+      'username' => '',
       'password' => nil,
       'fromAddress' => 'nexus@example.org',
       'subjectPrefix' => nil,
