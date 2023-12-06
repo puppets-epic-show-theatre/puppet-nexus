@@ -182,6 +182,21 @@ describe 'nexus', type: :class do
           is_expected.not_to contain_user('nexus')
         end
       end
+
+      context 'using pkg package type' do
+        let(:params) do
+          {
+            'package_type' => 'pkg',
+          }
+        end
+
+        it { is_expected.to compile }
+        it {
+          is_expected.to contain_package('nexus').with(
+            'ensure' => 'installed',
+          )
+        }
+      end
     end
   end
 end
