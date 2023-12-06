@@ -8,6 +8,9 @@ class nexus::package {
 
   case $nexus::package_type {
     'src': {
+      if !$nexus::version {
+        fail('nexus::version must be set when using package_type => src')
+      }
       $nexus_archive   = "nexus-${nexus::version}-unix.tar.gz"
       $download_url    = "${nexus::download_site}/${nexus_archive}"
       $dl_file         = "${nexus::download_folder}/${nexus_archive}"
@@ -64,11 +67,11 @@ class nexus::package {
           "${nexus::work_dir}/tmp",
         ]
 
-        file{ $directories:
+        file { $directories:
           ensure  => directory,
           owner   => $nexus::user,
           group   => $nexus::group,
-          require => Archive[ $dl_file ]
+          require => Archive[$dl_file],
         }
       }
     }
