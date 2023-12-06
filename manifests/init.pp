@@ -36,6 +36,19 @@
 # @param purge_default_repositories
 #   Set this option if you want to remove the default created maven and nuget repositories.
 #
+# @param admin_username
+#   The username of the administrator.
+# @param admin_first_name
+#   The first name of the administrator.
+# @param admin_last_name
+#   The last name of the administrator.
+# @param admin_email_address
+#   The email address of the administrator.
+# @param admin_roles
+#   The assigned roles of the administrator. It should include 'nx-admin'.
+# @param admin_password
+#   The password of the administrator. If not given there will be generated a random password.
+#
 # @example
 #   class{ 'nexus':
 #     version => '3.37.3-02',
@@ -58,6 +71,12 @@ class nexus (
   Boolean $manage_work_dir,
   Boolean $purge_installations,
   Boolean $purge_default_repositories,
+  Optional[String[1]] $admin_username,
+  Optional[String[1]] $admin_first_name,
+  Optional[String[1]] $admin_last_name,
+  Optional[String[1]] $admin_email_address,
+  Optional[Array[String[1]]] $admin_roles,
+  Optional[Variant[String[1], Sensitive[String[1]]]] $admin_password,
 ) {
   include stdlib
 
