@@ -5,14 +5,14 @@
 #
 class nexus::config::default_repositories {
   nexus_repository { [
-    'maven-central',
-    'maven-releases',
-    'maven-public',
-    'maven-snapshots',
-    'nuget-group',
-    'nuget-hosted',
-    'nuget.org-proxy'
-  ]:
-    ensure => 'absent',
+      'maven-central',
+      'maven-releases',
+      'maven-public',
+      'maven-snapshots',
+      'nuget-group',
+      'nuget-hosted',
+      'nuget.org-proxy',
+    ]:
+      ensure => 'absent',
   }
 }

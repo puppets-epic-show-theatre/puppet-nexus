@@ -31,7 +31,7 @@ class nexus::plugin::composer (
   }
 
   file { $composer_kar:
-    ensure  => 'present',
+    ensure  => 'file',
     mode    => '0644',
     owner   => 'root',
     group   => 'root',

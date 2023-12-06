@@ -1,13 +1,9 @@
-# @summary Resource to manage npm proxy repository
+# @summary Resource to manage yum proxy repository
 #
 # @param proxy_remote_url
-#   NPM repository url like https://registry.npmjs.org.
+#   yum repository url like https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/.
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
-# @param npm_remove_non_cataloged
-#   Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
-# @param npm_remove_quarantined
-#   Remove quarantined versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 # @param http_client_auto_block
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
@@ -19,9 +15,9 @@
 # @param online
 #   Enable this repository in nexus repository manager that it can be used.
 # @param proxy_content_max_age
-#   Max age of content (packages).
+#   Max age of content (packages)
 # @param proxy_metadata_max_age
-#   Max age of the repository metadata.
+#   Max age of the repository metadata
 # @param storage_blob_store_name
 #   The name of the blobstore inside of nexus repository manager to be used. We suggest to use a own blobstore for each
 #   defined repository.
@@ -31,17 +27,15 @@
 #   Controls if deployments of and updates to artifacts are allowed.
 #
 # @example
-#   nexus::repository::npm::proxy { 'npm-npmjs.org':
-#      proxy_remote_url => 'https://registry.npmjs.org',
+#   nexus::resource::repository::yum::proxy { 'yum-oracle-latest':
+#      proxy_remote_url => 'https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/',
 #   }
 #
-define nexus::resource::repository::npm::proxy (
+define nexus::resource::repository::yum::proxy (
   Stdlib::HTTPSUrl $proxy_remote_url,
   Enum['present', 'absent'] $ensure = 'present',
-  Boolean $npm_remove_non_cataloged = false,
-  Boolean $npm_remove_quarantined = false,
-  Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
+  Boolean $http_client_blocked = false,
   Boolean $negative_cache_enabled = true,
   Integer $negative_cache_time_to_live = 1440,
   Boolean $online = true,
@@ -49,11 +43,11 @@ define nexus::resource::repository::npm::proxy (
   Integer $proxy_metadata_max_age = 1440,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
-  Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
+  Enum['ALLOW'] $storage_write_policy = 'ALLOW',
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
-    format     => 'npm',
+    format     => 'yum',
     type       => 'proxy',
     attributes => {
       'online'          => $online,
@@ -86,10 +80,6 @@ define nexus::resource::repository::npm::proxy (
         'authentication' => undef,
       },
       'routingRuleName' => undef,
-      'npm'             => {
-        'removeNonCataloged' => $npm_remove_non_cataloged,
-        'removeQuarantined'  => $npm_remove_quarantined,
-      },
     },
   }
 }

@@ -1,13 +1,10 @@
-# @summary Resource to manage npm proxy repository
+# @summary
+#  Resource to manage RubyGems proxy repository
 #
 # @param proxy_remote_url
-#   NPM repository url like https://registry.npmjs.org.
+#   RubyGems repository url like https://rubygems.org/.
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
-# @param npm_remove_non_cataloged
-#   Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
-# @param npm_remove_quarantined
-#   Remove quarantined versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 # @param http_client_auto_block
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
@@ -31,15 +28,13 @@
 #   Controls if deployments of and updates to artifacts are allowed.
 #
 # @example
-#   nexus::repository::npm::proxy { 'npm-npmjs.org':
-#      proxy_remote_url => 'https://registry.npmjs.org',
+#   nexus::resource::repository::rubygems::proxy { 'rubygems.org':
+#      proxy_remote_url => 'https://rubygems.org/',
 #   }
 #
-define nexus::resource::repository::npm::proxy (
+define nexus::resource::repository::rubygems::proxy (
   Stdlib::HTTPSUrl $proxy_remote_url,
   Enum['present', 'absent'] $ensure = 'present',
-  Boolean $npm_remove_non_cataloged = false,
-  Boolean $npm_remove_quarantined = false,
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
   Boolean $negative_cache_enabled = true,
@@ -53,14 +48,13 @@ define nexus::resource::repository::npm::proxy (
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
-    format     => 'npm',
+    format     => 'rubygems',
     type       => 'proxy',
     attributes => {
       'online'          => $online,
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'proxy'           => {
@@ -86,10 +80,6 @@ define nexus::resource::repository::npm::proxy (
         'authentication' => undef,
       },
       'routingRuleName' => undef,
-      'npm'             => {
-        'removeNonCataloged' => $npm_remove_non_cataloged,
-        'removeQuarantined'  => $npm_remove_quarantined,
-      },
     },
   }
 }

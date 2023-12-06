@@ -38,7 +38,7 @@
 #
 define nexus::resource::repository::apt::proxy (
   String[1] $apt_distribution,
-  Stdlib::HTTPSUrl $proxy_remote_url,
+  Stdlib::HTTPUrl $proxy_remote_url,
   Boolean $apt_flat = false,
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $http_client_auto_block = true,
@@ -61,12 +61,12 @@ define nexus::resource::repository::apt::proxy (
       'storage'         => {
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
-        'writePolicy'                 => $storage_write_policy
+        'writePolicy'                 => $storage_write_policy,
       },
       'cleanup'         => undef,
       'apt'             => {
         'distribution' => $apt_distribution,
-        'flat'         => $apt_flat
+        'flat'         => $apt_flat,
       },
       'proxy'           => {
         'remoteUrl'      => $proxy_remote_url,
@@ -75,7 +75,7 @@ define nexus::resource::repository::apt::proxy (
       },
       'negativeCache'   => {
         'enabled'    => $negative_cache_enabled,
-        'timeToLive' => $negative_cache_time_to_live
+        'timeToLive' => $negative_cache_time_to_live,
       },
       'httpClient'      => {
         'blocked'        => $http_client_blocked,
@@ -86,11 +86,11 @@ define nexus::resource::repository::apt::proxy (
           'timeout'                 => undef,
           'enableCircularRedirects' => false,
           'enableCookies'           => false,
-          'useTrustStore'           => false
+          'useTrustStore'           => false,
         },
-        'authentication' => undef
+        'authentication' => undef,
       },
-      'routingRuleName' => undef
+      'routingRuleName' => undef,
     },
   }
 }

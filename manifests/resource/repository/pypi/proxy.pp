@@ -1,13 +1,10 @@
-# @summary Resource to manage npm proxy repository
+# @summary
+#  Resource to manage PyPi proxy repository
 #
 # @param proxy_remote_url
-#   NPM repository url like https://registry.npmjs.org.
+#   PyPi repository url like https://pypi.org.
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
-# @param npm_remove_non_cataloged
-#   Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
-# @param npm_remove_quarantined
-#   Remove quarantined versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 # @param http_client_auto_block
 #   Auto-block outbound connections on the repository if remote peer is detected as unreachable/unresponsive.
 # @param http_client_blocked
@@ -29,17 +26,17 @@
 #   Validate that all content uploaded to this repository is of a MIME type appropriate for the repository format.
 # @param storage_write_policy
 #   Controls if deployments of and updates to artifacts are allowed.
+# @param remove_quarantined
+#   Remove Quarantined Versions.
 #
 # @example
-#   nexus::repository::npm::proxy { 'npm-npmjs.org':
-#      proxy_remote_url => 'https://registry.npmjs.org',
+#   nexus::resource::repository::pypi::proxy { 'pypi.org':
+#      proxy_remote_url => 'https://pypi.org',
 #   }
 #
-define nexus::resource::repository::npm::proxy (
+define nexus::resource::repository::pypi::proxy (
   Stdlib::HTTPSUrl $proxy_remote_url,
   Enum['present', 'absent'] $ensure = 'present',
-  Boolean $npm_remove_non_cataloged = false,
-  Boolean $npm_remove_quarantined = false,
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
   Boolean $negative_cache_enabled = true,
@@ -50,10 +47,11 @@ define nexus::resource::repository::npm::proxy (
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
   Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
+  Boolean $remove_quarantined = false,
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
-    format     => 'npm',
+    format     => 'pypi',
     type       => 'proxy',
     attributes => {
       'online'          => $online,
@@ -86,9 +84,8 @@ define nexus::resource::repository::npm::proxy (
         'authentication' => undef,
       },
       'routingRuleName' => undef,
-      'npm'             => {
-        'removeNonCataloged' => $npm_remove_non_cataloged,
-        'removeQuarantined'  => $npm_remove_quarantined,
+      'pypi'            => {
+        'removeQuarantined' => $remove_quarantined,
       },
     },
   }

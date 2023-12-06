@@ -1,4 +1,4 @@
-# @summary Resource to manage docker hosted repository
+# @summary Resource to manage yum hosted repository
 #
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
@@ -13,37 +13,29 @@
 #   Controls if deployments of and updates to artifacts are allowed.
 # @param component_proprietary_components
 #   Components in this repository count as proprietary for namespace conflict attacks (requires Sonatype Nexus Firewall).
-# @param docker_v1_enabled
-#   Allow clients to use the V1 API to interact with this repository.
-# @param docker_force_basic_auth
-#   Allow anonymous docker pull ( Docker Bearer Token Realm required ).
-# @param docker_http_port
-#   Create an HTTP connector at specified port. Normally used if the server is behind a secure proxy.
-# @param docker_https_port
-#   Create an HTTPS connector at specified port. Normally used if the server is configured for https.
-# @param docker_subdomain
-#   Use the following subdomain to make push and pull requests for this repository.
+# @param repodata_depth
+#   Set the depth of the directory in which the repodata/repomd.xml will be generated.
+# @param deploy_policy
+#   Set the deploy policy, whether or not a redeploy of rpm's is allowed.
 #
 # @example
-#   nexus::repository::docker::hosted { 'docker-hosted':
+#   nexus::resource::repository::yum::hosted { 'yum-hosted':
+#     repodata_depth => 5,
 #   }
 #
-define nexus::resource::repository::docker::hosted (
+define nexus::resource::repository::yum::hosted (
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $online = true,
   String[1] $storage_blob_store_name = $title,
   Boolean $storage_strict_content_type_validation = true,
   Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW_ONCE',
   Boolean $component_proprietary_components = true,
-  Boolean $docker_v1_enabled = false,
-  Boolean $docker_force_basic_auth = true,
-  Optional[Stdlib::Port] $docker_http_port = undef,
-  Optional[Stdlib::Port] $docker_https_port = undef,
-  Optional[Stdlib::Fqdn] $docker_subdomain = undef,
+  Integer[0, 5] $repodata_depth = 0,
+  Enum['STRICT','PERMISSIVE'] $deploy_policy = 'STRICT',
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
-    format     => 'docker',
+    format     => 'yum',
     type       => 'hosted',
     attributes => {
       'online'    => $online,
@@ -56,12 +48,9 @@ define nexus::resource::repository::docker::hosted (
       'component' => {
         'proprietaryComponents' => $component_proprietary_components,
       },
-      'docker'    => {
-        'v1Enabled'      => $docker_v1_enabled,
-        'forceBasicAuth' => $docker_force_basic_auth,
-        'httpPort'       => $docker_http_port,
-        'httpsPort'      => $docker_https_port,
-        'subdomain'      => $docker_subdomain,
+      'yum'       => {
+        'repodataDepth' => $repodata_depth,
+        'deployPolicy'  => $deploy_policy,
       },
     },
   }
