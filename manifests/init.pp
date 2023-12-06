@@ -71,12 +71,12 @@ class nexus (
   Boolean $manage_work_dir,
   Boolean $purge_installations,
   Boolean $purge_default_repositories,
-  Optional[String[1]] $admin_username,
-  Optional[String[1]] $admin_first_name,
-  Optional[String[1]] $admin_last_name,
-  Optional[String[1]] $admin_email_address,
-  Optional[Array[String[1]]] $admin_roles,
-  Optional[Variant[String[1], Sensitive[String[1]]]] $admin_password,
+  Optional[String[1]] $admin_username = undef,
+  Optional[String[1]] $admin_first_name = undef,
+  Optional[String[1]] $admin_last_name = undef,
+  Optional[String[1]] $admin_email_address = undef,
+  Optional[Array[String[1]]] $admin_roles = undef,
+  Optional[Variant[String[1], Sensitive[String[1]]]] $admin_password = undef,
 ) {
   include stdlib
 

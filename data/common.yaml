@@ -14,10 +14,3 @@ nexus::purge_installations: true
 nexus::purge_default_repositories: false
 nexus::user: nexus
 nexus::work_dir: "%{lookup('nexus::install_root')}/sonatype-work/nexus3"
-
-nexus::admin_username: null
-nexus::admin_first_name: null
-nexus::admin_last_name: null
-nexus::admin_email_address: null
-nexus::admin_roles: null
-nexus::admin_password: null
