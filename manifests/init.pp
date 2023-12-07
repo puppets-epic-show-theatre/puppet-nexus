@@ -35,6 +35,13 @@
 #   Set this option if you want old installations of nexus repository manager to get automatically deleted.
 # @param purge_default_repositories
 #   Set this option if you want to remove the default created maven and nuget repositories.
+# @param package_type
+#   Select 'src' for Source download & install. 'pkg' will fetch te specified package and version
+#   from repos you must provide.
+# @param package_name
+#   The name of the package to install. Default 'nexus'
+# @param package_ensure
+#   The version to install. See https://puppet.com/docs/puppet/7/types/package.html#package-attribute-ensure
 #
 # @example
 #   class{ 'nexus':
@@ -42,7 +49,7 @@
 #   }
 #
 class nexus (
-  Pattern[/3.\d+.\d+-\d+/] $version,
+  Optional[Pattern[/3.\d+.\d+-\d+/]] $version,
   Stdlib::Absolutepath $download_folder,
   Stdlib::HTTPUrl $download_site,
   Optional[Stdlib::HTTPUrl] $download_proxy,
@@ -58,6 +65,9 @@ class nexus (
   Boolean $manage_work_dir,
   Boolean $purge_installations,
   Boolean $purge_default_repositories,
+  Enum['src', 'pkg'] $package_type,
+  Optional[String] $package_name,
+  String $package_ensure,
 ) {
   include stdlib
 
