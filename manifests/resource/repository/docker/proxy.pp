@@ -44,6 +44,8 @@
 #   Allow Nexus Repository Manager to download and cache foreign layers.
 # @param docker_proxy_foreign_layer_url_whitelist
 #   Regular expressions used to identify URLs that are allowed for foreign layer requests.
+# @param cleanup_policy_names
+#   Apply a list of cleanup policies to the repository. If a cleanup policy doesn't exist, nothing happens.
 #
 # @example
 #   nexus::resource::repository::docker::proxy { 'docker-docker.io':
@@ -79,6 +81,7 @@ define nexus::resource::repository::docker::proxy (
   Optional[Stdlib::HTTPSUrl] $docker_proxy_index_url = undef,
   Boolean $docker_proxy_cache_foreign_layers = false,
   Array[String[1]] $docker_proxy_foreign_layer_url_whitelist = [],
+  Array[String[1]] $cleanup_policy_names = [],
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -91,7 +94,9 @@ define nexus::resource::repository::docker::proxy (
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
         'writePolicy'                 => $storage_write_policy,
       },
-      'cleanup'         => undef,
+      'cleanup'   => {
+        'policyNames' => $cleanup_policy_names,
+      },
       'proxy'           => {
         'remoteUrl'      => $proxy_remote_url,
         'contentMaxAge'  => $proxy_content_max_age,

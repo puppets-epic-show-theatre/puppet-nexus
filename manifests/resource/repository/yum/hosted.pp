@@ -17,6 +17,8 @@
 #   Set the depth of the directory in which the repodata/repomd.xml will be generated.
 # @param deploy_policy
 #   Set the deploy policy, whether or not a redeploy of rpm's is allowed.
+# @param cleanup_policy_names
+#   Apply a list of cleanup policies to the repository. If a cleanup policy doesn't exist, nothing happens.
 #
 # @example
 #   nexus::resource::repository::yum::hosted { 'yum-hosted':
@@ -32,6 +34,7 @@ define nexus::resource::repository::yum::hosted (
   Boolean $component_proprietary_components = true,
   Integer[0, 5] $repodata_depth = 0,
   Enum['STRICT','PERMISSIVE'] $deploy_policy = 'STRICT',
+  Array[String[1]] $cleanup_policy_names = [],
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -44,7 +47,9 @@ define nexus::resource::repository::yum::hosted (
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
         'writePolicy'                 => $storage_write_policy,
       },
-      'cleanup'   => undef,
+      'cleanup'   => {
+        'policyNames' => $cleanup_policy_names,
+      },
       'component' => {
         'proprietaryComponents' => $component_proprietary_components,
       },
