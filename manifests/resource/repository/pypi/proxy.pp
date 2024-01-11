@@ -28,6 +28,8 @@
 #   Controls if deployments of and updates to artifacts are allowed.
 # @param remove_quarantined
 #   Remove Quarantined Versions.
+# @param cleanup_policy_names
+#   Apply a list of cleanup policies to the repository. If a cleanup policy doesn't exist, nothing happens.
 #
 # @example
 #   nexus::resource::repository::pypi::proxy { 'pypi.org':
@@ -48,6 +50,7 @@ define nexus::resource::repository::pypi::proxy (
   Boolean $storage_strict_content_type_validation = true,
   Enum['ALLOW','ALLOW_ONCE','DENY'] $storage_write_policy = 'ALLOW',
   Boolean $remove_quarantined = false,
+  Array[String[1]] $cleanup_policy_names = [],
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -60,7 +63,9 @@ define nexus::resource::repository::pypi::proxy (
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
         'writePolicy'                 => $storage_write_policy,
       },
-      'cleanup'         => undef,
+      'cleanup'   => {
+        'policyNames' => $cleanup_policy_names,
+      },
       'proxy'           => {
         'remoteUrl'      => $proxy_remote_url,
         'contentMaxAge'  => $proxy_content_max_age,

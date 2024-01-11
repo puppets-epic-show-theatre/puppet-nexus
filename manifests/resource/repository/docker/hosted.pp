@@ -23,6 +23,8 @@
 #   Create an HTTPS connector at specified port. Normally used if the server is configured for https.
 # @param docker_subdomain
 #   Use the following subdomain to make push and pull requests for this repository.
+# @param cleanup_policy_names
+#   Apply a list of cleanup policies to the repository. If a cleanup policy doesn't exist, nothing happens.
 #
 # @example
 #   nexus::repository::docker::hosted { 'docker-hosted':
@@ -40,6 +42,7 @@ define nexus::resource::repository::docker::hosted (
   Optional[Stdlib::Port] $docker_http_port = undef,
   Optional[Stdlib::Port] $docker_https_port = undef,
   Optional[Stdlib::Fqdn] $docker_subdomain = undef,
+  Array[String[1]] $cleanup_policy_names = [],
 ) {
   nexus_repository { $title:
     ensure     => $ensure,
@@ -52,7 +55,9 @@ define nexus::resource::repository::docker::hosted (
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
         'writePolicy'                 => $storage_write_policy,
       },
-      'cleanup'   => undef,
+      'cleanup'   => {
+        'policyNames' => $cleanup_policy_names,
+      },
       'component' => {
         'proprietaryComponents' => $component_proprietary_components,
       },
