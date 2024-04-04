@@ -74,6 +74,10 @@ class nexus (
 ) {
   include stdlib
 
+  if (versioncmp($version, '3.67.0-03') >= 0 and ! $java_runtime) {
+    fail('You need to define the $java_runtime parameter.')
+  }
+
   contain nexus::user
   contain nexus::package
 
