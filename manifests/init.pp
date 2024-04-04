@@ -5,6 +5,8 @@
 #
 # @param version
 #   The version to download, install and manage.
+# @param java_runtime
+#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
 # @param download_folder
 #   Destination folder of the downloaded archive.
 # @param download_site
@@ -50,6 +52,7 @@
 #
 class nexus (
   Optional[Pattern[/3.\d+.\d+-\d+/]] $version,
+  Optional[Enum['java8', 'java11']] $java_runtime,
   Stdlib::Absolutepath $download_folder,
   Stdlib::HTTPUrl $download_site,
   Optional[Stdlib::HTTPUrl] $download_proxy,
