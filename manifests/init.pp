@@ -3,16 +3,10 @@
 #
 # @see https://help.sonatype.com/repomanager3/product-information/download/download-archives---repository-manager-3
 #
-# @param version
-#   The version to download, install and manage.
-# @param java_runtime
-#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
 # @param download_folder
 #   Destination folder of the downloaded archive.
 # @param download_site
 #   Download uri which will be appended with filename of the archive to download.
-# @param download_proxy
-#   Proxyserver address which will be used to download the archive file.
 # @param install_root
 #   The root filesystem path where the downloaded archive will be extracted to.
 # @param work_dir
@@ -40,10 +34,16 @@
 # @param package_type
 #   Select 'src' for Source download & install. 'pkg' will fetch te specified package and version
 #   from repos you must provide.
-# @param package_name
-#   The name of the package to install. Default 'nexus'
 # @param package_ensure
 #   The version to install. See https://puppet.com/docs/puppet/7/types/package.html#package-attribute-ensure
+# @param download_proxy
+#   Proxyserver address which will be used to download the archive file.
+# @param version
+#   The version to download, install and manage.
+# @param java_runtime
+#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
+# @param package_name
+#   The name of the package to install. Default 'nexus'
 #
 # @example
 #   class{ 'nexus':
@@ -51,11 +51,8 @@
 #   }
 #
 class nexus (
-  Optional[Pattern[/3.\d+.\d+-\d+/]] $version,
-  Optional[Enum['java8', 'java11']] $java_runtime,
   Stdlib::Absolutepath $download_folder,
   Stdlib::HTTPUrl $download_site,
-  Optional[Stdlib::HTTPUrl] $download_proxy,
   Stdlib::Absolutepath $install_root,
   Stdlib::Absolutepath $work_dir,
   String[1] $user,
@@ -69,8 +66,11 @@ class nexus (
   Boolean $purge_installations,
   Boolean $purge_default_repositories,
   Enum['src', 'pkg'] $package_type,
-  Optional[String] $package_name,
   String $package_ensure,
+  Optional[Stdlib::HTTPUrl] $download_proxy = undef,
+  Optional[Pattern[/3.\d+.\d+-\d+/]] $version = undef,
+  Optional[Enum['java8', 'java11']] $java_runtime = undef,
+  Optional[String] $package_name = undef,
 ) {
   include stdlib
 
