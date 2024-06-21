@@ -63,7 +63,7 @@ define nexus::resource::repository::pypi::proxy (
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
         'writePolicy'                 => $storage_write_policy,
       },
-      'cleanup'   => {
+      'cleanup'         => {
         'policyNames' => $cleanup_policy_names,
       },
       'proxy'           => {

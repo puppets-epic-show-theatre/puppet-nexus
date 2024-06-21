@@ -59,7 +59,7 @@ define nexus::resource::repository::rubygems::proxy (
         'blobStoreName'               => $storage_blob_store_name,
         'strictContentTypeValidation' => $storage_strict_content_type_validation,
       },
-      'cleanup'   => {
+      'cleanup'         => {
         'policyNames' => $cleanup_policy_names,
       },
       'proxy'           => {
