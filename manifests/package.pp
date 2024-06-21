@@ -11,7 +11,14 @@ class nexus::package {
       if !$nexus::version {
         fail('nexus::version must be set when using package_type => src')
       }
-      $nexus_archive   = "nexus-${nexus::version}-unix.tar.gz"
+
+      if $nexus::java_runtime {
+        # Relevant only for Nexus versions >= 3.67.0-03
+        $nexus_archive   = "nexus-${nexus::version}-${nexus::java_runtime}-unix.tar.gz"
+      } else {
+        $nexus_archive   = "nexus-${nexus::version}-unix.tar.gz"
+      }
+
       $download_url    = "${nexus::download_site}/${nexus_archive}"
       $dl_file         = "${nexus::download_folder}/${nexus_archive}"
       $install_dir     = "${nexus::install_root}/nexus-${nexus::version}"
