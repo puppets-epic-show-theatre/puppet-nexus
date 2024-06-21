@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Extended test suite to puppet 8
 - Add docker subdomain connector parameter
+- `nexus::resource::repository::rubygems::proxy` to manage rubygems proxy repositories
+- `nexus::resource::repository::raw::hosted` to manage raw hosted repositories
+- `nexus::resource::repository::pypi::proxy` to manage pypi proxy repositories
+- `cleanup_policy_names` added to all repository types
+- Option to install nexus by package
+- Option to set java runtime version (nexus >= 3.67.0-03)
 
 ### Changed
 - PDK version to 3.0.0
