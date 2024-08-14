@@ -15,6 +15,7 @@ nexus::purge_installations: true
 nexus::purge_default_repositories: false
 nexus::user: nexus
 nexus::work_dir: "%{lookup('nexus::install_root')}/sonatype-work/nexus3"
-nexus::package_type: 'src'
-nexus::package_name: 'nexus'
-nexus::package_ensure: 'installed'
+nexus::package_type: src
+nexus::package_name: nexus
+nexus::package_ensure: installed
+nexus::datastore_enabled: false
