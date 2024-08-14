@@ -18,4 +18,4 @@ nexus::work_dir: "%{lookup('nexus::install_root')}/sonatype-work/nexus3"
 nexus::package_type: src
 nexus::package_name: nexus
 nexus::package_ensure: installed
-nexus::datastore_enabled: false
+nexus::manage_datastore: false
