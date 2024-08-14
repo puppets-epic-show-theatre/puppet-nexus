@@ -41,7 +41,7 @@
 # @param version
 #   The version to download, install and manage.
 # @param java_runtime
-#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
+#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0.
 # @param package_name
 #   The name of the package to install. Default 'nexus'
 #
@@ -74,8 +74,8 @@ class nexus (
 ) {
   include stdlib
 
-  if ($version and versioncmp($version, '3.67.0-03') >= 0 and ! $java_runtime) {
-    fail('You need to define the $java_runtime parameter.')
+  if ($version and versioncmp($version, '3.67.0-03') >= 0 and versioncmp($version, '3.71.0') < 0 and ! $java_runtime) {
+    fail('You need to define the $java_runtime parameter for nexus version >= 3.67.0-03 and < 3.71.0')
   }
 
   contain nexus::user

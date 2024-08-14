@@ -210,7 +210,7 @@ Default value: `undef`
 
 Data type: `Optional[Enum['java8', 'java11']]`
 
-The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
+The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0.
 
 Default value: `undef`
 
