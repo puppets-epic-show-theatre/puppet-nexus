@@ -28,7 +28,7 @@
 # @param manage_work_dir
 #   Set if this module should manage the work directory of the nexus repository manager.
 # @param manage_datastore
-#   Set if this module should manage datastore - ATM only postgresql is supported
+#   Set if this module should manage datastore - Note that you need a licence for postgresql backend
 # @param purge_installations
 #   Set this option if you want old installations of nexus repository manager to get automatically deleted.
 # @param purge_default_repositories

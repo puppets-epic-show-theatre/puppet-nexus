@@ -174,7 +174,7 @@ Set if this module should manage the work directory of the nexus repository mana
 
 Data type: `Boolean`
 
-Set if this module should manage datastore - ATM only postgresql is supported
+Set if this module should manage datastore - Note that you need a licence for postgresql backend
 
 ##### <a name="-nexus--purge_installations"></a>`purge_installations`
 
