@@ -1,9 +1,7 @@
-# @summary A short summary of the purpose of this class
+# @summary Manage the nexus postgresql datastore settings
 #
-# A description of what this class does
+# Only available in Sonatype Nexus Repository Pro
 #
-# @example
-#   include nexus::config::postgresql_datastore
 class nexus::config::postgresql_datastore {
   assert_private()
 

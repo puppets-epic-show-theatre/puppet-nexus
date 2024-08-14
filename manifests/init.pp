@@ -47,11 +47,12 @@
 # @param package_name
 #   The name of the package to install. Default 'nexus'
 # @param postgresql_username
-#   Postgresql Username
+#   Postgresql Username - Only available in Sonatype Nexus Repository Pro
 # @param postgresql_password
-#   Postgresql Password
+#   Postgresql Password - Only available in Sonatype Nexus Repository Pro
 # @param postgresql_jdbcurl
 #   Postgresql jdbcUrl. Formatted as jdbc\:postgresql\://<database-host>\:<database-port>/nexus
+#   Only available in Sonatype Nexus Repository Pro
 #
 # @example
 #   class{ 'nexus':
