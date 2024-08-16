@@ -13,7 +13,7 @@ class nexus::package {
       }
 
       if $nexus::java_runtime {
-        # Relevant only for Nexus versions >= 3.67.0-03
+        # Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0
         $nexus_archive   = "nexus-${nexus::version}-${nexus::java_runtime}-unix.tar.gz"
       } else {
         $nexus_archive   = "nexus-${nexus::version}-unix.tar.gz"

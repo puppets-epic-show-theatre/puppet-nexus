@@ -14,6 +14,7 @@
 * [`nexus::config::default_repositories`](#nexus--config--default_repositories): Removes the default repositories for maven and nuget
 * [`nexus::config::device`](#nexus--config--device): Create puppet device config used to connect to the rest api
 * [`nexus::config::email`](#nexus--config--email): Manage the nexus repository manager email settings
+* [`nexus::config::postgresql_datastore`](#nexus--config--postgresql_datastore): Manage the nexus postgresql datastore settings
 * [`nexus::config::properties`](#nexus--config--properties): A short summary of the purpose of this class
 * [`nexus::plugin::composer`](#nexus--plugin--composer): Install the composer repository format plugin
 
@@ -84,6 +85,7 @@ The following parameters are available in the `nexus` class:
 * [`manage_config`](#-nexus--manage_config)
 * [`manage_user`](#-nexus--manage_user)
 * [`manage_work_dir`](#-nexus--manage_work_dir)
+* [`manage_datastore`](#-nexus--manage_datastore)
 * [`purge_installations`](#-nexus--purge_installations)
 * [`purge_default_repositories`](#-nexus--purge_default_repositories)
 * [`package_type`](#-nexus--package_type)
@@ -92,6 +94,9 @@ The following parameters are available in the `nexus` class:
 * [`version`](#-nexus--version)
 * [`java_runtime`](#-nexus--java_runtime)
 * [`package_name`](#-nexus--package_name)
+* [`postgresql_username`](#-nexus--postgresql_username)
+* [`postgresql_password`](#-nexus--postgresql_password)
+* [`postgresql_jdbcurl`](#-nexus--postgresql_jdbcurl)
 
 ##### <a name="-nexus--download_folder"></a>`download_folder`
 
@@ -165,6 +170,12 @@ Data type: `Boolean`
 
 Set if this module should manage the work directory of the nexus repository manager.
 
+##### <a name="-nexus--manage_datastore"></a>`manage_datastore`
+
+Data type: `Boolean`
+
+Set if this module should manage datastore - Note that you need a licence for postgresql backend
+
 ##### <a name="-nexus--purge_installations"></a>`purge_installations`
 
 Data type: `Boolean`
@@ -210,7 +221,7 @@ Default value: `undef`
 
 Data type: `Optional[Enum['java8', 'java11']]`
 
-The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
+The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0.
 
 Default value: `undef`
 
@@ -219,6 +230,31 @@ Default value: `undef`
 Data type: `Optional[String]`
 
 The name of the package to install. Default 'nexus'
+
+Default value: `undef`
+
+##### <a name="-nexus--postgresql_username"></a>`postgresql_username`
+
+Data type: `Optional[String[1]]`
+
+Postgresql Username - Only available in Sonatype Nexus Repository Pro
+
+Default value: `undef`
+
+##### <a name="-nexus--postgresql_password"></a>`postgresql_password`
+
+Data type: `Optional[String[1]]`
+
+Postgresql Password - Only available in Sonatype Nexus Repository Pro
+
+Default value: `undef`
+
+##### <a name="-nexus--postgresql_jdbcurl"></a>`postgresql_jdbcurl`
+
+Data type: `Optional[String[1]]`
+
+Postgresql jdbcUrl. Formatted as jdbc\:postgresql\://<database-host>\:<database-port>/nexus
+Only available in Sonatype Nexus Repository Pro
 
 Default value: `undef`
 
@@ -477,6 +513,10 @@ Data type: `Boolean`
 Use certificates stored in the Nexus truststore to connect to external systems.
 
 Default value: `false`
+
+### <a name="nexus--config--postgresql_datastore"></a>`nexus::config::postgresql_datastore`
+
+Only available in Sonatype Nexus Repository Pro
 
 ### <a name="nexus--config--properties"></a>`nexus::config::properties`
 

@@ -27,6 +27,8 @@
 #   Set if this module should manage the creation of the operation system user.
 # @param manage_work_dir
 #   Set if this module should manage the work directory of the nexus repository manager.
+# @param manage_datastore
+#   Set if this module should manage datastore - Note that you need a licence for postgresql backend
 # @param purge_installations
 #   Set this option if you want old installations of nexus repository manager to get automatically deleted.
 # @param purge_default_repositories
@@ -41,9 +43,16 @@
 # @param version
 #   The version to download, install and manage.
 # @param java_runtime
-#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03.
+#   The Java runtime to be utilized. Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0.
 # @param package_name
 #   The name of the package to install. Default 'nexus'
+# @param postgresql_username
+#   Postgresql Username - Only available in Sonatype Nexus Repository Pro
+# @param postgresql_password
+#   Postgresql Password - Only available in Sonatype Nexus Repository Pro
+# @param postgresql_jdbcurl
+#   Postgresql jdbcUrl. Formatted as jdbc\:postgresql\://<database-host>\:<database-port>/nexus
+#   Only available in Sonatype Nexus Repository Pro
 #
 # @example
 #   class{ 'nexus':
@@ -63,6 +72,7 @@ class nexus (
   Boolean $manage_config,
   Boolean $manage_user,
   Boolean $manage_work_dir,
+  Boolean $manage_datastore,
   Boolean $purge_installations,
   Boolean $purge_default_repositories,
   Enum['src', 'pkg'] $package_type,
@@ -71,11 +81,14 @@ class nexus (
   Optional[Pattern[/3.\d+.\d+-\d+/]] $version = undef,
   Optional[Enum['java8', 'java11']] $java_runtime = undef,
   Optional[String] $package_name = undef,
+  Optional[String[1]] $postgresql_username = undef,
+  Optional[String[1]] $postgresql_password = undef,
+  Optional[String[1]] $postgresql_jdbcurl = undef,
 ) {
   include stdlib
 
-  if ($version and versioncmp($version, '3.67.0-03') >= 0 and ! $java_runtime) {
-    fail('You need to define the $java_runtime parameter.')
+  if ($version and versioncmp($version, '3.67.0-03') >= 0 and versioncmp($version, '3.71.0') < 0 and ! $java_runtime) {
+    fail('You need to define the $java_runtime parameter for nexus version >= 3.67.0-03 and < 3.71.0')
   }
 
   contain nexus::user
