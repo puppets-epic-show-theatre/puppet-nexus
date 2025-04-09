@@ -17,7 +17,7 @@ class nexus::package {
         $nexus_archive = "nexus-${nexus::version}-${nexus::java_runtime}-unix.tar.gz"
       } else {
         if (versioncmp($nexus::version, '3.78.0') >= 0) {
-          $hardware      = regsubst($facts['os.hardware'], '_','-')
+          $hardware      = regsubst($facts['os']['hardware'], '_','-')
           $nexus_archive = "nexus-unix-${hardware}-${nexus::version}.tar.gz"
         } else {
           $nexus_archive = "nexus-${nexus::version}-unix.tar.gz"
