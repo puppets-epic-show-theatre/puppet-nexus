@@ -14,14 +14,19 @@ class nexus::package {
 
       if $nexus::java_runtime {
         # Relevant only for Nexus versions >= 3.67.0-03 and < 3.71.0
-        $nexus_archive   = "nexus-${nexus::version}-${nexus::java_runtime}-unix.tar.gz"
+        $nexus_archive = "nexus-${nexus::version}-${nexus::java_runtime}-unix.tar.gz"
       } else {
-        $nexus_archive   = "nexus-${nexus::version}-unix.tar.gz"
+        if (versioncmp($nexus::version, '3.78.0') >= 0) {
+          $hardware      = regsubst($facts['os']['hardware'], '_','-')
+          $nexus_archive = "nexus-unix-${hardware}-${nexus::version}.tar.gz"
+        } else {
+          $nexus_archive = "nexus-${nexus::version}-unix.tar.gz"
+        }
       }
 
-      $download_url    = "${nexus::download_site}/${nexus_archive}"
-      $dl_file         = "${nexus::download_folder}/${nexus_archive}"
-      $install_dir     = "${nexus::install_root}/nexus-${nexus::version}"
+      $download_url = "${nexus::download_site}/${nexus_archive}"
+      $dl_file      = "${nexus::download_folder}/${nexus_archive}"
+      $install_dir  = "${nexus::install_root}/nexus-${nexus::version}"
 
       extlib::mkdir_p($nexus::install_root)
 
