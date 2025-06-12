@@ -1393,7 +1393,6 @@ The following parameters are available in the `nexus::resource::repository::npm:
 
 * [`proxy_remote_url`](#-nexus--resource--repository--npm--proxy--proxy_remote_url)
 * [`ensure`](#-nexus--resource--repository--npm--proxy--ensure)
-* [`npm_remove_non_cataloged`](#-nexus--resource--repository--npm--proxy--npm_remove_non_cataloged)
 * [`npm_remove_quarantined`](#-nexus--resource--repository--npm--proxy--npm_remove_quarantined)
 * [`http_client_auto_block`](#-nexus--resource--repository--npm--proxy--http_client_auto_block)
 * [`http_client_blocked`](#-nexus--resource--repository--npm--proxy--http_client_blocked)
@@ -1420,14 +1419,6 @@ Data type: `Enum['present', 'absent']`
 Define if the resource should be created/present or deleted/absent.
 
 Default value: `'present'`
-
-##### <a name="-nexus--resource--repository--npm--proxy--npm_remove_non_cataloged"></a>`npm_remove_non_cataloged`
-
-Data type: `Boolean`
-
-Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
-
-Default value: `false`
 
 ##### <a name="-nexus--resource--repository--npm--proxy--npm_remove_quarantined"></a>`npm_remove_quarantined`
 

@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0]
+### Added
+- Support for Debian 12
+
+### Changed
+- Handle >= 3.80.0 nexus versions
+- PDK version to 3.4.0
+
+### Removed
+- Removed deprecated `npm_remove_non_cataloged` in `nexus::resource::repository::npm::proxy`
+- Support for CentOS 7
+- Support for RedHat 7
+- Support for Debian 9
+- Support for Debian 10
+- Support for Ubuntu 16.04
+- Support for Ubuntu 18.04
+
 ## [4.1.1]
 ### Changed
 - Handle >= 3.78.0 nexus versions
