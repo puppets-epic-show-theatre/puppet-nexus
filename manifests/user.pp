@@ -8,7 +8,7 @@ class nexus::user {
 
   if($nexus::manage_user) {
     group { $nexus::group :
-      ensure  => present,
+      ensure => present,
     }
 
     user { $nexus::user:
