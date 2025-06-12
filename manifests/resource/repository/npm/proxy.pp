@@ -4,8 +4,6 @@
 #   NPM repository url like https://registry.npmjs.org.
 # @param ensure
 #   Define if the resource should be created/present or deleted/absent.
-# @param npm_remove_non_cataloged
-#   Remove non-cataloged versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 # @param npm_remove_quarantined
 #   Remove quarantined versions from the npm package metadata. (Requires IQ: Audit and Quarantine)
 # @param http_client_auto_block
@@ -40,7 +38,6 @@
 define nexus::resource::repository::npm::proxy (
   Stdlib::HTTPSUrl $proxy_remote_url,
   Enum['present', 'absent'] $ensure = 'present',
-  Boolean $npm_remove_non_cataloged = false,
   Boolean $npm_remove_quarantined = false,
   Boolean $http_client_blocked = false,
   Boolean $http_client_auto_block = true,
@@ -92,8 +89,7 @@ define nexus::resource::repository::npm::proxy (
       },
       'routingRuleName' => undef,
       'npm'             => {
-        'removeNonCataloged' => $npm_remove_non_cataloged,
-        'removeQuarantined'  => $npm_remove_quarantined,
+        'removeQuarantined' => $npm_remove_quarantined,
       },
     },
   }
