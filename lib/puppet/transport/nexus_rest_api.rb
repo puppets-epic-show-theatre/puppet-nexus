@@ -7,6 +7,7 @@ module Puppet::Transport # rubocop:disable Style/ClassAndModuleChildren
     # Initialise this transport with a set of credentials
     def initialize(context, connection_info)
       @connection_info = connection_info
+      @use_tmp_pw = false
       verify(context)
     end
 
@@ -17,7 +18,7 @@ module Puppet::Transport # rubocop:disable Style/ClassAndModuleChildren
 
     # Return the options hash with basic auth credentials used by the http client
     def build_options
-      if File.exist?(@connection_info[:tmp_pw_file])
+      if @use_tmp_pw && File.exist?(@connection_info[:tmp_pw_file])
         username = 'admin'
         password = File.read(@connection_info[:tmp_pw_file])
       else
@@ -95,7 +96,16 @@ module Puppet::Transport # rubocop:disable Style/ClassAndModuleChildren
     def verify(context)
       context.debug("Checking connection to #{@connection_info[:address]}:#{@connection_info[:port]}")
 
-      raise 'authentication error' unless get_request(context, 'status').success?
+      # First try with connection_info credentials
+      begin
+        raise 'authentication error' unless get_request(context, 'status').success?
+      rescue => e
+        # If authentication fails and tmp_pw_file exists, try with that
+        raise e unless File.exist?(@connection_info[:tmp_pw_file])
+        context.debug('Authentication failed with connection_info, trying with tmp_pw_file')
+        @use_tmp_pw = true
+        raise 'authentication error' unless get_request(context, 'status').success?
+      end
     end
 
     # Retrieve facts from the target and return in a hash
