@@ -19,6 +19,16 @@ class nexus::plugin::composer (
   $composer_kar = "${nexus::plugin::plugin_dir}/nexus-repository-composer-bundle.kar"
   $download_url = "https://repo1.maven.org/maven2/org/sonatype/nexus/plugins/nexus-repository-composer/${version}/nexus-repository-composer-${version}-bundle.kar"
 
+  if versioncmp($nexus::version, '3.74.0') > 0 {
+    file_line { 'disable-built-in-composer-plugin':
+      path    => "${nexus::package::install_dir}/system/com/sonatype/nexus/assemblies/nexus-community-feature/${nexus::version}/nexus-community-feature-${nexus::version}-features.xml",
+      line    => '',
+      match   => '^\s*<feature version="[^"]*">nexus-repository-composer</feature>',
+      before  => Class['nexus::service'],
+      require => Class['nexus::package'],
+    }
+  }
+
   archive { $composer_kar:
     cleanup       => false, # if this is true the downloaded file will be deleted
     checksum_type => 'sha1',
