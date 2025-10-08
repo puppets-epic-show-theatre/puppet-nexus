@@ -59,4 +59,23 @@ class Puppet::Provider::NexusBlobstore::NexusBlobstore < Puppet::ResourceApi::Si
 
     context.err(res.body) unless res.success?
   end
+
+  def canonicalize(context, resources)
+    resources.each do |resource|
+      resource[:attributes] = deep_sort(resource[:attributes]) unless resource[:attributes].nil?
+    end
+  end
+
+  def deep_sort(obj)
+    case obj
+    when Hash
+      obj.keys.sort.each_with_object({}) do |key, sorted|
+        sorted[key] = deep_sort(obj[key])
+      end
+    when Array
+      obj.map { |e| deep_sort(e) }
+    else
+      obj
+    end
+  end
 end
