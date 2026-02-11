@@ -59,4 +59,53 @@ class Puppet::Provider::NexusBlobstore::NexusBlobstore < Puppet::ResourceApi::Si
 
     context.err(res.body) unless res.success?
   end
+
+  def canonicalize(context, resources)
+    resources.each do |resource|
+      resource[:attributes] = deep_sort(resource[:attributes]) unless resource[:attributes].nil?
+    end
+  end
+
+  def insync?(context, name, property_name, is_hash, should_hash)
+    context.debug("Checking whether #{property_name} is out of sync")
+
+    case name
+    when :attributes
+      is_attrs = deep_sort(is_hash[:attributes])
+      should_attrs = deep_sort(should_hash[:attributes])
+
+      # Strip out known credentials first (if they're set), since Nexus doesn't return those
+      stripped_keys = [
+        [:bucketConfiguration, :bucketSecurity, :secretAccessKey]
+      ]
+
+      stripped_keys.each do |path|
+        is_attrs = deep_delete(is_attrs, path)
+        should_attrs = deep_delete(should_attrs, path)
+      end
+
+      is_attrs == should_attrs
+    else
+      is_hash[name] == should_hash[name]
+    end
+  end
+
+  def deep_delete(hash, *keys)
+    *parents, last = keys
+    parent = hash.dig(*parents)
+    parent.delete(last) if parent.is_a?(Hash)
+  end
+
+  def deep_sort(obj)
+    case obj
+    when Hash
+      obj.keys.sort.each_with_object({}) do |key, sorted|
+        sorted[key] = deep_sort(obj[key])
+      end
+    when Array
+      obj.map { |e| deep_sort(e) }
+    else
+      obj
+    end
+  end
 end

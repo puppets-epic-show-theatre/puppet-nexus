@@ -9,7 +9,7 @@ Puppet::ResourceApi.register_type(
 
         Please use the defined types instead of this one directly.
   EOS
-  features: ['simple_get_filter'],
+  features: ['canonicalize', 'custom_insync', 'simple_get_filter'],
   attributes: {
     ensure: {
       type: 'Enum[present, absent]',
