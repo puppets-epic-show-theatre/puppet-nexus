@@ -60,7 +60,7 @@ class Puppet::Provider::NexusBlobstore::NexusBlobstore < Puppet::ResourceApi::Si
     context.err(res.body) unless res.success?
   end
 
-  def canonicalize(context, resources)
+  def canonicalize(_context, resources)
     resources.each do |resource|
       resource[:attributes] = deep_sort(resource[:attributes]) unless resource[:attributes].nil?
     end
@@ -76,7 +76,7 @@ class Puppet::Provider::NexusBlobstore::NexusBlobstore < Puppet::ResourceApi::Si
 
       # Strip out known credentials first (if they're set), since Nexus doesn't return those
       stripped_keys = [
-        [:bucketConfiguration, :bucketSecurity, :secretAccessKey]
+        [:bucketConfiguration, :bucketSecurity, :secretAccessKey],
       ]
 
       stripped_keys.each do |path|
