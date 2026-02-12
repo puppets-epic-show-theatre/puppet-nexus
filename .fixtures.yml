@@ -3,7 +3,9 @@ fixtures:
     stdlib: 'puppetlabs/stdlib'
     archive: 'puppet/archive'
     concat: 'puppetlabs/concat'
-    cron_core: 'puppetlabs/cron_core'
+    cron_core:
+      repo: 'puppetlabs/cron_core'
+      ref: '1.3.0'
     device_manager: 'puppetlabs/device_manager'
     extlib: 'puppet/extlib'
   symlinks:
